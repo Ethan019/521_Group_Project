@@ -1,0 +1,38 @@
+CREATE OR REPLACE PROCEDURE LetterGrades
+
+AS 
+	theGrade StudentRecord.Grade%TYPE;
+	theID StudentRecord.StudId%TYPE;
+	
+	CURSOR c IS 
+		SELECT StudId, Grade FROM StudentRecord
+		WHERE StudId = :new.StudId;
+BEGIN
+	OPEN c;
+	LOOP
+		FETCH c INTO theGrade, theID;
+		EXIT WHEN c%NOTFOUND;
+		IF theGrade>=90 THEN
+			update students set grade='A' where ID = theID;
+		ELSIF theGrade>=80 THEN
+			update students set grade='B' where ID = theID;
+		ELSIF theGrade>=70 THEN
+			update students set grade='C' where ID = theID;
+		ELSIF theGrade>=60 THEN
+			update students set grade='D' where ID = theID;
+		ELSE
+			update students set grade='F' where ID = theID;
+		END IF;
+	END LOOP;
+	CLOSE c;
+	CREATE VIEW AlphaGrade AS
+		SELECT * FROM StudentRecord
+		WHERE StudID = :new.StudID;
+	SELECT * FROM AlphaGrade;	
+END;
+.
+run;
+
+BEGIN Assigngrades; END;
+.
+run;
