@@ -13,15 +13,15 @@ BEGIN
 		FETCH c INTO theGrade, theID;
 		EXIT WHEN c%NOTFOUND;
 		IF theGrade>=90 THEN
-			update students set grade='A' where ID = theID;
+			update students set lettergrade='A' where ID = theID;
 		ELSIF theGrade>=80 THEN
-			update students set grade='B' where ID = theID;
+			update students set lettergrade='B' where ID = theID;
 		ELSIF theGrade>=70 THEN
-			update students set grade='C' where ID = theID;
+			update students set lettergrade='C' where ID = theID;
 		ELSIF theGrade>=60 THEN
-			update students set grade='D' where ID = theID;
+			update students set lettergrade='D' where ID = theID;
 		ELSE
-			update students set grade='F' where ID = theID;
+			update students set lettergrade='F' where ID = theID;
 		END IF;
 	END LOOP;
 	CLOSE c;
