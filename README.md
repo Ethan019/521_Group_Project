@@ -11,9 +11,9 @@ Jared Keklak
 Java based local application using SQL-server to manage a mock database of a university.
 
 
-Programming conventions "\n"
-#all types are typed lowercase ex: int, string, float. not INT, STRING, FLOAT "\n"
-#variables that contain more than 1 whole word, will be spaces by _ characters. Ex: string car, string car_port, string car_steering_wheel \n
-#all local variables are lowercase characters or numbers \n
-#all class variables are uppercase characters and numbers. ex: string CAR_TYPE, int CAR_NUMBER \n
-#all function names are SnakeCase. ex. ExampleFunctionOne(CAR_TYPE, CAR_NUMBER) \n
+Programming conventions
+#all types are typed lowercase ex: int, string, float. not INT, STRING, FLOAT 
+#variables that contain more than 1 whole word, will be spaces by _ characters. Ex: string car, string car_port, string car_steering_wheel
+#all local variables are lowercase characters or numbers
+#all class variables are uppercase characters and numbers. ex: string CAR_TYPE, int CAR_NUMBER
+#all function names are SnakeCase. ex. ExampleFunctionOne(CAR_TYPE, CAR_NUMBER)
