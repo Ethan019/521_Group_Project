@@ -30,7 +30,6 @@ CREATE VIEW StudRecord AS
 GRANT SELECT ON StudRecord TO Stud;
 
 
-
 GRANT SELECT ON COURSE, REGISTEREDFOR TO Prof;
 
 //Professor ability to edit information for courses they teach
@@ -51,3 +50,10 @@ CREATE VIEW ProfGradeUpdate AS
 	WHERE PROFID = Prof;
 
 GRANT UPDATE ON ProfGradeUpdate TO Prof;
+
+//CREATE VIEW ScAdminStudView AS
+//	SELECT [] FROM STUDENT
+//	WHERE ScAdId = SAdm;
+
+//GRANT MODIFY ON ScAdminStudView TO SAdm;
+
