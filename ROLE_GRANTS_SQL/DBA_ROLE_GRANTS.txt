@@ -1,1 +1,2 @@
 
+GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
