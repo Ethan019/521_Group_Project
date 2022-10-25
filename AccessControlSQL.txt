@@ -1,3 +1,5 @@
+//Roughest of Rough Drafts, but at least a starting point - Liz
+
 GRANT SELECT ON COURSE, REGISTEREDFOR, STUDENTRECORD TO Stud;
 
 CREATE VIEW StudReg AS
