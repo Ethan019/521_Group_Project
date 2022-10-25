@@ -2,6 +2,8 @@
 
 GRANT SELECT ON COURSE, REGISTEREDFOR, STUDENTRECORD TO Stud;
 
+//Student ability to edit their registration information
+
 CREATE VIEW StudReg AS
 	SELECT *
 	FROM REGISTEREDFOR
@@ -9,12 +11,16 @@ CREATE VIEW StudReg AS
 
 GRANT INSERT, DELETE ON StudReg TO Stud;
 
+//Student ability to view their own grades, but not other students' grades
+
 CREATE VIEW StudGradeView AS
 	SELECT r.CRN, c.DEPTKEY, c.COURSENUM, c.COURSENAME, r.GRADE
 	FROM COURSE c, REGISTEREDFOR r
 	WHERE STUDID = Stud AND c.CRN = r.CRN;
 
 GRANT SELECT ON StudGradeView TO Stud;
+
+//Student ability to view their own student record, but not others' records
 
 CREATE VIEW StudRecord AS
 	SELECT *
@@ -27,12 +33,17 @@ GRANT SELECT ON StudRecord TO Stud;
 
 GRANT SELECT ON COURSE, REGISTEREDFOR TO Prof;
 
+//Professor ability to edit information for courses they teach
+
 CREATE VIEW ProfCourseMod AS
 	SELECT COURSENUM, SECTIONNUM, COURSENAME, DESC, SEMESTER, YEAR
 	FROM COURSE
 	WHERE PROFID = Prof;
 
 GRANT MODIFY ON ProfCourseMod TO Prof;
+
+//Professor ability to add/update grades for students in their classes - but not edit grades for other classes for students, i.e. ones that they
+//	don't teach
 
 CREATE VIEW ProfGradeUpdate AS
 	SELECT GRADE
