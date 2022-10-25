@@ -29,7 +29,6 @@ CREATE VIEW StudRecord AS
 
 GRANT SELECT ON StudRecord TO Stud;
 
-
 GRANT SELECT ON COURSE, REGISTEREDFOR TO Prof;
 
 //Professor ability to edit information for courses they teach
@@ -52,8 +51,10 @@ CREATE VIEW ProfGradeUpdate AS
 GRANT UPDATE ON ProfGradeUpdate TO Prof;
 
 //CREATE VIEW ScAdminStudView AS
-//	SELECT [] FROM STUDENT
-//	WHERE ScAdId = SAdm;
+//	SELECT * FROM STUDENT
+//	WHERE SCHADID = SAdm and //make sure prof can only view student in their department? there is no department identifier in the student table;
 
-//GRANT MODIFY ON ScAdminStudView TO SAdm;
 
+//CREATE VIEW ScAdminProfView AS
+//	SELECT * FROM PROFESSOR p, DEPARTMENT d
+//	WHERE SCHADID = SAdm AND p.DEPTKEY = d.DEPTKEY;
