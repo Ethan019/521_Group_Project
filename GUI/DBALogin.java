@@ -23,8 +23,8 @@ public class DBALogin
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
-		username = new JLabel("USERNAME");
-		username.setBounds(150, 85, 70, 20);
+		username = new JLabel("UNIVERSITY ID");
+		username.setBounds(150, 85, 90, 20);
 		panel.add(username);
 
 		user = new JTextField();
@@ -73,6 +73,11 @@ public class DBALogin
 		RETURN.addActionListener(e ->
 		{
 			frame.dispose();
+		});
+
+		login.addActionListener(e ->
+		{
+
 		});
 
 		frame.setAlwaysOnTop(true);

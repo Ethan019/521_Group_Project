@@ -24,8 +24,8 @@ public class LoginWindow
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
-		username = new JLabel("USERNAME");
-		username.setBounds(150, 125, 70, 20);
+		username = new JLabel("UNIVERSITY ID");
+		username.setBounds(150, 125, 90, 20);
 		panel.add(username);
 
 		user = new JTextField();
@@ -64,6 +64,11 @@ public class LoginWindow
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.setAlwaysOnTop(true);
+
+		login.addActionListener(e ->
+		{
+			;
+		});
 
 	}
 
