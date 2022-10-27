@@ -10,11 +10,11 @@ GRANT SELECT ON STUDENT, PROFESSOR, COURSE, STUDENTRECORD, COURSE, REGISTEREDFOR
 
 GRANT MODIFY ON STUDENT, PROFESSOR, REGISTEREDFOR TO SAdm;
 
-//Liz: create view on COURSES table & grant modify privileges - should be in SAdm dept ONLY
+//Liz: create view on COURSES table & grant select privileges - should be in SAdm dept ONLY
 
 CREATE VIEW SAdmModCourse AS
   SELECT c.COURSENUM, c.SECTIONNUM, c.COURSENAME, c.DESC, c.SEMESTER, c.YEAR
   FROM COURSE c, SCHOOLADMIN s
   WHERE c.DEPTKEY = s.DEPTKEY;
   
-GRANT MODIFY ON SAdmModCourse TO SAdm;
+GRANT SELECT ON SAdmModCourse TO SAdm;
