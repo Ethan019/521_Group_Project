@@ -1,1 +1,20 @@
+//Liz: create role SAdm to represent School Administrators
 
+CREATE ROLE SAdm;
+
+// Liz: grant select privileges on STUDENT, PROFESSOR, STUDENTRECORD, COURSE, REGISTEREDFOR tables - should be for STUDENT, PROFESSOR, STUDENTRECORD, REGISTEREDFOR in their dept ONLY
+
+GRANT SELECT ON STUDENT, PROFESSOR, COURSE, STUDENTRECORD, COURSE, REGISTEREDFOR TO SAdm;
+
+// Liz: grant modify privileges on STUDENT, PROFESSOR, REGISTEREDFOR tables - should be in SAdm dept ONLY
+
+GRANT MODIFY ON STUDENT, PROFESSOR, REGISTEREDFOR TO SAdm;
+
+//Liz: create view on COURSES table & grant modify privileges - should be in SAdm dept ONLY
+
+CREATE VIEW SAdmModCourse AS
+  SELECT c.COURSENUM, c.SECTIONNUM, c.COURSENAME, c.DESC, c.SEMESTER, c.YEAR
+  FROM COURSE c, SCHOOLADMIN s
+  WHERE c.DEPTKEY = s.DEPTKEY;
+  
+GRANT MODIFY ON SAdmModCourse TO SAdm;
