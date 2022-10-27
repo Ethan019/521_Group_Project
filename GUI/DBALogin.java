@@ -12,32 +12,39 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class LoginWindow
+public class DBALogin
 {
-	private static JButton login, dba_login;
+	private static JButton login, RETURN;
 	private static JLabel username, password;
 	private static JTextField user, pass;
-	private static DBALogin DBA = new DBALogin();
 
-	public LoginWindow()
+	public DBALogin()
 	{
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
 		username = new JLabel("USERNAME");
-		username.setBounds(150, 125, 70, 20);
+		username.setBounds(150, 85, 70, 20);
 		panel.add(username);
 
 		user = new JTextField();
-		user.setBounds(150, 145, 193, 28);
+		user.setBounds(150, 105, 193, 28);
 		panel.add(user);
 
 		password = new JLabel("PASSWORD");
-		password.setBounds(150, 170, 70, 20);
+		password.setBounds(150, 130, 70, 20);
 		panel.add(password);
 
 		pass = new JTextField();
-		pass.setBounds(150, 190, 193, 28);
+		pass.setBounds(150, 150, 193, 28);
+		panel.add(pass);
+
+		password = new JLabel("DBA ID");
+		password.setBounds(150, 175, 70, 20);
+		panel.add(password);
+
+		pass = new JTextField();
+		pass.setBounds(150, 193, 193, 28);
 		panel.add(pass);
 
 		ButtonListener listener = new ButtonListener();
@@ -49,12 +56,11 @@ public class LoginWindow
 		login.addActionListener(listener);
 		panel.add(login);
 
-		dba_login = new JButton("DBA LOGIN");
-		dba_login.setBounds(380, 330, 96, 25);
-		dba_login.setForeground(Color.WHITE);
-		dba_login.setBackground(Color.DARK_GRAY);
-		dba_login.addActionListener(listener);
-		panel.add(dba_login);
+		RETURN = new JButton("RETURN");
+		RETURN.setBounds(380, 330, 96, 25);
+		RETURN.setForeground(Color.WHITE);
+		RETURN.setBackground(Color.DARK_GRAY);
+		panel.add(RETURN);
 
 		JFrame frame = new JFrame();
 		frame.setTitle("UNIVERSITY LOGIN PAGE");
@@ -63,6 +69,12 @@ public class LoginWindow
 		frame.setSize(new Dimension(500, 400));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+
+		RETURN.addActionListener(e ->
+		{
+			frame.dispose();
+		});
+
 		frame.setAlwaysOnTop(true);
 
 	}
@@ -77,16 +89,12 @@ public class LoginWindow
 
 			}
 
-			if (source == dba_login)
-			{
-				DBALogin.main(null);
-			}
 		}
 	}
 
 	public static void main(String args[])
 	{
-		new LoginWindow();
+		new DBALogin();
 	}
 
 }
