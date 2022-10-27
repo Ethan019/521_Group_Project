@@ -1,6 +1,6 @@
 //Liz: create role SAdm to represent School Administrators
 
-CREATE ROLE SAdm;
+CREATE ROLE SAdm IDENTIFY BY PASSWORD;
 
 // Liz: grant select privileges on STUDENT, PROFESSOR, STUDENTRECORD, COURSE, REGISTEREDFOR tables - should be for STUDENT, PROFESSOR, STUDENTRECORD, REGISTEREDFOR in their dept ONLY
 
