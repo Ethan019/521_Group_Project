@@ -2,10 +2,12 @@
 
 //WIP
 
-
 import java.io.*;
 import java.sql.*;
 import java.util.Scanner;
+
+
+
 
 public class StudentSQL {
 
@@ -52,19 +54,19 @@ public class StudentSQL {
     public void add_course(Connection conn, int STUDID, int CRN, char COURSENUM) throws SQLException, IOException{
 
         Statement st = conn.createStatement();
-        String stud = (String)STUDID;
-        String nCRN = (String)CRN;
-        String nCN = (String)COURSENUM;
-        Statement st = conn.createStatement();
+        String stud = Integer.toString(STUDID);
+        String nCRN = Integer.toString(CRN);
+        String nCN = Character.toString(COURSENUM);
+        
 
-        String query1 = "select* from Regigeredfor Where STUDID = '" + stud "' AND CRN = '" +nCN +'"';
+        String query1 = "select* from Regigeredfor Where STUDID = '" + stud +"' AND CRN = '" +nCN +'"';
 
-        ResultSet rs = st.executeQuery(query1)
+        ResultSet rs = st.executeQuery(query1);
         if(rs.next()==true){
-            Sytem.out.println("You are already registered for this course");
+            System.out.println("You are already registered for this course");
             return;
         }
-        rs.close()
+        rs.close();
 
 
         String query2 ="Insert into Registeredfor(STUDID, CRN, COURSENUM) values('" + STUDID + "', '" + nCRN + "', '" +nCRN +"')";
@@ -74,6 +76,7 @@ public class StudentSQL {
             st.executeUpdate(query2);
 
         }
+
         catch (SQLException e)
         {
             System.out.println("Message: " + e.getMessage());
