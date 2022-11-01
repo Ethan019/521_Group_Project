@@ -1,0 +1,22 @@
+Setting up local Oracle Server
+
+
+Download first: 
+https://www.oracle.com/database/technologies/xe-downloads.html
+
+unzip and run SETUP from zipped items. 
+and create a local server. 
+
+BE SURE TO SAVE THE PASSWORD FOR THE LOCAL SERVER
+
+my password: Sys
+
+
+Once this is downloaded download the next:
+https://www.oracle.com/database/sqldeveloper/technologies/download/
+MAKE SURE JDK 11 
+
+Run gui from new file created from unzipping that download. 
+
+USE YOUR LOGIN to connect to local server!
+
