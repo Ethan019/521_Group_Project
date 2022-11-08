@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class StudentSQL {
 
+    //student views (needs return objects)
     public void studentView(Connection conn, int STUDID) throws SQLException, IOException{
         try{
         Statement st = conn.createStatement(); 
@@ -31,6 +32,7 @@ public class StudentSQL {
         }
 
     }
+    //student display courses (not complete)
     public void showcourses(Connection conn,String depart ) throws SQLException, IOException{
         try(
             Statement st = conn.createStatement();
@@ -51,6 +53,9 @@ public class StudentSQL {
 
         }
     }
+
+
+    //student add course (not complete)
     public void add_course(Connection conn, int STUDID, int CRN, char COURSENUM) throws SQLException, IOException{
 
         Statement st = conn.createStatement();
@@ -59,11 +64,13 @@ public class StudentSQL {
         String nCN = Character.toString(COURSENUM);
         
 
-        String query1 = "select* from Regigeredfor Where STUDID = '" + stud +"' AND CRN = '" +nCN +'"';
+        String query1 = "select* from REGISTEREDFOR Where STUDID = '" + stud +"' AND CRN = '" +nCN +'"';
 
         ResultSet rs = st.executeQuery(query1);
         if(rs.next()==true){
             System.out.println("You are already registered for this course");
+            rs.close();
+
             return;
         }
         rs.close();
@@ -85,6 +92,34 @@ public class StudentSQL {
 
     }
 
+    //student drop class (not finished)
+    public void student_drop(Connection conn, int CRN, int STUDID) throws SQLException{
+
+        Statement st = conn.createStatement();
+        String stud = Integer.toString(STUDID);
+        String scrn = Integer.toString(CRN);
+        String query = "select CRN from RegisteredFor where CRN = '" + scrn+ "' AND STUDID = '"+stud+"'";
+        
+        ResultSet rs = st.executeQuery(query);
+        
+        //escape clause for when course is not registered for. 
+        if(rs.next()==false){
+            return;
+        }
+        else{{
+            query ="Delete From RegisteredFor WHERE CRN = '" + scrn+ "' AND STUDID = '"+stud+"'"; 
+        
+        
+            try{
+                st.executeUpdate(query);
+            }
+            catch(SQLException e){
+                System.out.println("message: "+e.getMessage());
+            }
+        }
+         }
+
+    }
 
 
 
