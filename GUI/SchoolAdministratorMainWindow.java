@@ -18,56 +18,53 @@ import javax.swing.text.PlainDocument;
 public class SchoolAdministratorMainWindow
 {
 
-	// modify student registration
-	// modify courses
-	// add or remove a professor
-	// add or remove a student
-	// see student record
+	private static JButton MODIFY_STUDENT_REGISTRATION, ADD_OR_REMOVE_A_COURSE, ADD_OR_REMOVE_PROFESSOR,
+			ADD_OR_REMOVE_A_STUDENT, SEE_STUDENT_RECORD;
 
-	private static JButton modify_student_registration, modify_courses, add_or_remove_a_professor,
-			add_or_remove_a_student, see_student_record;
+	private String MESSAGE = "Please Select an Option";
 
 	public SchoolAdministratorMainWindow()
 	{
+
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
 		ButtonListener listener = new ButtonListener();
 
-		modify_courses = new JButton("Modify offered courses");
-		modify_courses.setBounds(150, 130, 193, 25);
-		modify_courses.setForeground(Color.WHITE);
-		modify_courses.setBackground(Color.DARK_GRAY);
-		modify_courses.addActionListener(listener);
-		panel.add(modify_courses);
+		ADD_OR_REMOVE_A_COURSE = new JButton("Add or Remove a Course");
+		ADD_OR_REMOVE_A_COURSE.setBounds(150, 130, 193, 25);
+		ADD_OR_REMOVE_A_COURSE.setForeground(Color.WHITE);
+		ADD_OR_REMOVE_A_COURSE.setBackground(Color.DARK_GRAY);
+		ADD_OR_REMOVE_A_COURSE.addActionListener(listener);
+		panel.add(ADD_OR_REMOVE_A_COURSE);
 
-		add_or_remove_a_professor = new JButton("Add or Remove a professor");
-		add_or_remove_a_professor.setBounds(150, 160, 193, 25);
-		add_or_remove_a_professor.setForeground(Color.WHITE);
-		add_or_remove_a_professor.setBackground(Color.DARK_GRAY);
-		add_or_remove_a_professor.addActionListener(listener);
-		panel.add(add_or_remove_a_professor);
+		ADD_OR_REMOVE_PROFESSOR = new JButton("Add or Remove a Professor");
+		ADD_OR_REMOVE_PROFESSOR.setBounds(150, 160, 193, 25);
+		ADD_OR_REMOVE_PROFESSOR.setForeground(Color.WHITE);
+		ADD_OR_REMOVE_PROFESSOR.setBackground(Color.DARK_GRAY);
+		ADD_OR_REMOVE_PROFESSOR.addActionListener(listener);
+		panel.add(ADD_OR_REMOVE_PROFESSOR);
 
-		modify_student_registration = new JButton("Modify Student Registration");
-		modify_student_registration.setBounds(150, 190, 193, 25);
-		modify_student_registration.setForeground(Color.WHITE);
-		modify_student_registration.setBackground(Color.DARK_GRAY);
-		modify_student_registration.addActionListener(listener);
-		panel.add(modify_student_registration);
+		MODIFY_STUDENT_REGISTRATION = new JButton("Modify Student Registration");
+		MODIFY_STUDENT_REGISTRATION.setBounds(150, 190, 193, 25);
+		MODIFY_STUDENT_REGISTRATION.setForeground(Color.WHITE);
+		MODIFY_STUDENT_REGISTRATION.setBackground(Color.DARK_GRAY);
+		MODIFY_STUDENT_REGISTRATION.addActionListener(listener);
+		panel.add(MODIFY_STUDENT_REGISTRATION);
 
-		add_or_remove_a_student = new JButton("Add or Remove a student");
-		add_or_remove_a_student.setBounds(150, 220, 193, 25);
-		add_or_remove_a_student.setForeground(Color.WHITE);
-		add_or_remove_a_student.setBackground(Color.DARK_GRAY);
-		add_or_remove_a_student.addActionListener(listener);
-		panel.add(add_or_remove_a_student);
+		ADD_OR_REMOVE_A_STUDENT = new JButton("Add or Remove a Student");
+		ADD_OR_REMOVE_A_STUDENT.setBounds(150, 220, 193, 25);
+		ADD_OR_REMOVE_A_STUDENT.setForeground(Color.WHITE);
+		ADD_OR_REMOVE_A_STUDENT.setBackground(Color.DARK_GRAY);
+		ADD_OR_REMOVE_A_STUDENT.addActionListener(listener);
+		panel.add(ADD_OR_REMOVE_A_STUDENT);
 
-		see_student_record = new JButton("See a Student Record");
-		see_student_record.setBounds(150, 250, 193, 25);
-		see_student_record.setForeground(Color.WHITE);
-		see_student_record.setBackground(Color.DARK_GRAY);
-		see_student_record.addActionListener(listener);
-		panel.add(see_student_record);
+		SEE_STUDENT_RECORD = new JButton("See a Student Record");
+		SEE_STUDENT_RECORD.setBounds(150, 250, 193, 25);
+		SEE_STUDENT_RECORD.setForeground(Color.WHITE);
+		SEE_STUDENT_RECORD.setBackground(Color.DARK_GRAY);
+		SEE_STUDENT_RECORD.addActionListener(listener);
+		panel.add(SEE_STUDENT_RECORD);
 
 		JFrame frame = new JFrame();
 		frame.setTitle("UNIVERSITY: ADMINISTRATOR");
@@ -84,12 +81,12 @@ public class SchoolAdministratorMainWindow
 		public void actionPerformed(ActionEvent event) throws IllegalArgumentException
 		{
 			Object source = event.getSource(); // 3--> question icon for popups
-			if (source == modify_courses)
+			if (source == ADD_OR_REMOVE_A_COURSE)
 			{
 				Object[] options1 =
 				{ "Add Course", "Remove Course" };
 
-				int selection = JOptionPane.showOptionDialog(null, "message", "Modify Offered Courses",
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Offered Courses",
 						JOptionPane.DEFAULT_OPTION, 3, null, options1, null);
 
 				switch (selection)
@@ -115,6 +112,15 @@ public class SchoolAdministratorMainWindow
 
 					int selection_add_course = JOptionPane.showOptionDialog(null, course_fields_add,
 							"Enter Course Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_course, null);
+
+					/*
+					 * 
+					 * 
+					 * additonal code to grab text information and SQL function HERE
+					 * 
+					 * 
+					 */
+
 					break;
 
 				case 1:
@@ -133,16 +139,24 @@ public class SchoolAdministratorMainWindow
 					int selection_delete_professor = JOptionPane.showOptionDialog(null, course_fields_delete,
 							"Enter Professor ID", JOptionPane.CANCEL_OPTION, 3, null, options_delete_course, null);
 
+					/*
+					 * 
+					 * 
+					 * additonal code to grab text information and SQL function HERE
+					 * 
+					 * 
+					 */
+
 					break;
 
 				}
 			}
-			if (source == add_or_remove_a_professor)
+			if (source == ADD_OR_REMOVE_PROFESSOR)
 			{
 				Object[] options1 =
 				{ "Add Professor", "Remove Professor" };
 
-				int selection = JOptionPane.showOptionDialog(null, "message", "Modify Offered Courses",
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Offered Courses",
 						JOptionPane.DEFAULT_OPTION, 3, null, options1, null);
 
 				switch (selection)
@@ -170,6 +184,14 @@ public class SchoolAdministratorMainWindow
 							"Enter Professor Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_professor,
 							null);
 
+					/*
+					 * 
+					 * 
+					 * additonal code to grab text information and SQL function HERE
+					 * 
+					 * 
+					 */
+
 					break;
 
 				case 1:
@@ -187,20 +209,28 @@ public class SchoolAdministratorMainWindow
 					int selection_delete_professor = JOptionPane.showOptionDialog(null, professor_fields_delete,
 							"Enter Professor ID", JOptionPane.CANCEL_OPTION, 3, null, options_delete_professor, null);
 
+					/*
+					 * 
+					 * 
+					 * additonal code to grab text information and SQL function HERE
+					 * 
+					 * 
+					 */
+
 					break;
 
 				}
 			}
-			if (source == modify_student_registration)
+			if (source == MODIFY_STUDENT_REGISTRATION)
 			{
 
 			}
-			if (source == add_or_remove_a_student)
+			if (source == ADD_OR_REMOVE_A_STUDENT)
 			{
 				Object[] options1 =
 				{ "Add Student", "Remove Student" };
 
-				int selection = JOptionPane.showOptionDialog(null, "message", "Add or Remove student",
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Add or Remove student",
 						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
 
 				switch (selection)
@@ -227,6 +257,14 @@ public class SchoolAdministratorMainWindow
 					int selection_add_student = JOptionPane.showOptionDialog(null, student_fields_add,
 							"Enter student Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_student, null);
 
+					/*
+					 * 
+					 * 
+					 * additonal code to grab text information and SQL function HERE
+					 * 
+					 * 
+					 */
+
 					break;
 
 				case 1:
@@ -244,11 +282,19 @@ public class SchoolAdministratorMainWindow
 					int selection_delete_professor = JOptionPane.showOptionDialog(null, student_fields_delete,
 							"Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null, options_delete_student, null);
 
+					/*
+					 * 
+					 * 
+					 * additonal code to grab text information and SQL function HERE
+					 * 
+					 * 
+					 */
+
 					break;
 
 				}
 			}
-			if (source == see_student_record)
+			if (source == SEE_STUDENT_RECORD)
 			{
 
 			}

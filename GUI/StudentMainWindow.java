@@ -13,29 +13,32 @@ import javax.swing.JPanel;
 public class StudentMainWindow
 {
 
-	private static JButton see_current_courses, modify_course_registration;
+	private static JButton SEE_CURRENT_COURSES, MODIFY_COURSE_REGISTRATION;
+	String MESSAGE = "Please Select an Option";
 
 	public StudentMainWindow()
 	{
+
+		String MESSAGE = "Please Select an Option";
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
 		ButtonListener listener = new ButtonListener();
 
-		see_current_courses = new JButton("See Current Courses");
-		see_current_courses.setBounds(150, 150, 193, 25);
-		see_current_courses.setForeground(Color.WHITE);
-		see_current_courses.setBackground(Color.DARK_GRAY);
-		see_current_courses.addActionListener(listener);
-		panel.add(see_current_courses);
+		SEE_CURRENT_COURSES = new JButton("See Current Courses");
+		SEE_CURRENT_COURSES.setBounds(150, 150, 193, 25);
+		SEE_CURRENT_COURSES.setForeground(Color.WHITE);
+		SEE_CURRENT_COURSES.setBackground(Color.DARK_GRAY);
+		SEE_CURRENT_COURSES.addActionListener(listener);
+		panel.add(SEE_CURRENT_COURSES);
 
-		modify_course_registration = new JButton("Modify Course Registration");
-		modify_course_registration.setBounds(150, 180, 193, 25);
-		modify_course_registration.setForeground(Color.WHITE);
-		modify_course_registration.setBackground(Color.DARK_GRAY);
-		modify_course_registration.addActionListener(listener);
-		panel.add(modify_course_registration);
+		MODIFY_COURSE_REGISTRATION = new JButton("Modify Course Registration");
+		MODIFY_COURSE_REGISTRATION.setBounds(150, 180, 193, 25);
+		MODIFY_COURSE_REGISTRATION.setForeground(Color.WHITE);
+		MODIFY_COURSE_REGISTRATION.setBackground(Color.DARK_GRAY);
+		MODIFY_COURSE_REGISTRATION.addActionListener(listener);
+		panel.add(MODIFY_COURSE_REGISTRATION);
 
 		JFrame frame = new JFrame();
 		frame.setTitle("UNIVERSITY: STUDENT");
@@ -51,14 +54,26 @@ public class StudentMainWindow
 		public void actionPerformed(ActionEvent event) throws IllegalArgumentException
 		{
 			Object source = event.getSource();
-			if (source == see_current_courses)
+			if (source == SEE_CURRENT_COURSES)
 			{
-
+				/*
+				 * 
+				 * 
+				 * additonal code to grab text information and SQL function HERE
+				 * 
+				 * 
+				 */
 			}
 
-			if (source == modify_course_registration)
+			if (source == MODIFY_COURSE_REGISTRATION)
 			{
-
+				/*
+				 * 
+				 * 
+				 * additonal code to grab text information and SQL function HERE
+				 * 
+				 * 
+				 */
 			}
 		}
 	}

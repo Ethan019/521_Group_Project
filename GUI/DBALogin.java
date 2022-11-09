@@ -14,47 +14,47 @@ import javax.swing.JTextField;
 
 public class DBALogin
 {
-	private static JButton login, RETURN;
-	private static JLabel username, password;
-	private static JTextField user, pass;
+	private static JButton LOGIN, RETURN;
+	private static JLabel USERNAME, PASSWORD;
+	private static JTextField USER, PASS;
 
 	public DBALogin()
 	{
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
-		username = new JLabel("UNIVERSITY ID");
-		username.setBounds(150, 85, 90, 20);
-		panel.add(username);
+		USERNAME = new JLabel("UNIVERSITY ID");
+		USERNAME.setBounds(150, 85, 90, 20);
+		panel.add(USERNAME);
 
-		user = new JTextField();
-		user.setBounds(150, 105, 193, 28);
-		panel.add(user);
+		USER = new JTextField();
+		USER.setBounds(150, 105, 193, 28);
+		panel.add(USER);
 
-		password = new JLabel("PASSWORD");
-		password.setBounds(150, 130, 70, 20);
-		panel.add(password);
+		PASSWORD = new JLabel("PASSWORD");
+		PASSWORD.setBounds(150, 130, 70, 20);
+		panel.add(PASSWORD);
 
-		pass = new JTextField();
-		pass.setBounds(150, 150, 193, 28);
-		panel.add(pass);
+		PASS = new JTextField();
+		PASS.setBounds(150, 150, 193, 28);
+		panel.add(PASS);
 
-		password = new JLabel("DBA ID");
-		password.setBounds(150, 175, 70, 20);
-		panel.add(password);
+		PASSWORD = new JLabel("DBA ID");
+		PASSWORD.setBounds(150, 175, 70, 20);
+		panel.add(PASSWORD);
 
-		pass = new JTextField();
-		pass.setBounds(150, 193, 193, 28);
-		panel.add(pass);
+		PASS = new JTextField();
+		PASS.setBounds(150, 193, 193, 28);
+		panel.add(PASS);
 
 		ButtonListener listener = new ButtonListener();
 
-		login = new JButton("LOGIN");
-		login.setBounds(150, 225, 193, 25);
-		login.setForeground(Color.WHITE);
-		login.setBackground(Color.DARK_GRAY);
-		login.addActionListener(listener);
-		panel.add(login);
+		LOGIN = new JButton("LOGIN");
+		LOGIN.setBounds(150, 225, 193, 25);
+		LOGIN.setForeground(Color.WHITE);
+		LOGIN.setBackground(Color.DARK_GRAY);
+		LOGIN.addActionListener(listener);
+		panel.add(LOGIN);
 
 		RETURN = new JButton("RETURN");
 		RETURN.setBounds(380, 330, 96, 25);
@@ -75,7 +75,7 @@ public class DBALogin
 			frame.dispose();
 		});
 
-		login.addActionListener(e ->
+		LOGIN.addActionListener(e ->
 		{
 
 		});
@@ -89,9 +89,15 @@ public class DBALogin
 		public void actionPerformed(ActionEvent event) throws IllegalArgumentException
 		{
 			Object source = event.getSource();
-			if (source == login)
+			if (source == LOGIN)
 			{
-
+				/*
+				 * 
+				 * 
+				 * additonal code to grab text information and SQL function HERE
+				 * 
+				 * 
+				 */
 			}
 
 		}
