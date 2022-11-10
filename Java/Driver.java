@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.sql.*;
 
+
 public class Driver {
 
 
@@ -14,13 +15,40 @@ public class Driver {
 		try
 		{
 			String url = "jdbc:mysql://localhost/bankaccount";  //test is the database name
-			String user = "root"; //username
+			String user = "Student"; //username THIS WILL CHANGE TO AN OBJECT PASSED IN BY LOGIN. DEPENING ON ROLL THIS WILL ONLY BE SELECTED IF CURRENT USER IS SELECTED
 			String password = "t123456"; //root password, you set it when you install the DBMS
 
-			conn = DriverManager.getConnection(url, user, password);
+			PreparedStatement st = conn.PreparedStatement("select* from users where uname=? and pass=?");
+			st.setString(1, user);
+			st.setString(2, password);
+			ResultSet rs = st.executeQuery();
+
+			if(rs.next()){
+				String username = rs.getString("uname");
+				String role = rs.getString("role");
+				if (role=null || role.isEmpty()){
+					return;
+				}
+				else if (role.equals("student")){
+					
+				}
+			}
+			
 		    //print menu
+
+
+			//temp values for error checking DELETE 
+			String STUDID = "U1234";
+			String CRN = "2345";
+			String COURSENUM = "U101";
+			String DEPART = "SCI";
+
+
+			//END OF TEMP VALUES FOR TEST CASE
+
 			Scanner scan = new Scanner(System.in);
-			SQLCommands SQL = new SQLCommands();
+			//CREATES THE SQL CUSTOM CLASS FROM STUDENTSSQL;
+			StudentSQL SQL = new StudentSQL();
 			int command;
 			String input;
 	        boolean keepGoing = true;
@@ -32,9 +60,9 @@ public class Driver {
 				
 				switch(command)
 				{
-					case 1: SQL.add_course(conn, scan); break;
-					case 2: SQL.show_courses(conn); break;
-					case 3: SQL.delete_course(conn, scan); break;
+					case 1: SQL.studentView(conn, STUDID);; break;
+					case 2: SQL.add_course(conn, STUDID, CRN, COURSENUM); break;
+					case 3: SQL.student_drop(conn, CRN, STUDID); break;
 					case 4: SQL.add_student(conn, scan); break;	
 					case 5: SQL.delete_student(conn, scan); break;
 					case 6: SQL.register_course(conn, scan); break;
