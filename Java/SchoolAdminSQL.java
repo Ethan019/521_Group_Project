@@ -243,7 +243,7 @@ public class SchoolAdminSQL {
     }
 
     // Delete a course
-    public void DeleteCourse(Connection conn, String DEL_COURSE_NUM, String DEPT_KEY) throws SQLException, IOException {
+    public void DeleteCourse(Connection conn, String COURSE_NUM, String DEPT_KEY) throws SQLException, IOException {
         Statement st = conn.createStatement();
 
         try {
