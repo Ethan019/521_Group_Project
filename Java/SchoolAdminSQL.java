@@ -161,7 +161,7 @@ public class SchoolAdminSQL {
         try {
             Statement st = conn.createStatement();
 
-            //Scanner sc = new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);
             //System.out.println("Enter Student ID: ");
             //String stud_id = sc.nextLine();
 
@@ -244,9 +244,9 @@ public class SchoolAdminSQL {
 
     // Delete a course
     public void DeleteCourse(Connection conn, String COURSE_NUM, String DEPT_KEY) throws SQLException, IOException {
-        Statement st = conn.createStatement();
-
         try {
+            Statement st = conn.createStatement();
+            
             Scanner sc = new Scanner(System.in);
             //System.out.println("Enter Course Number to Delete: ");
             //String del_course_num = sc.nextLine();
