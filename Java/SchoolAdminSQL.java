@@ -137,7 +137,7 @@ public class SchoolAdminSQL {
             //String department = sc.nextLine();
 
             String update_query = "UPDATE PROFESSOR SET FNAME = '" + f_name + "', LNAME = '" + l_name + "', DEPTKEY = '" + department + "' WHERE PROFID = '" + prof_id + "';";
-            ResultSet rs2 = st.executeQuery(update_query);
+            ResultSet rs = st.executeQuery(update_query);
 
             if(rs.hasNext() == true) {
                 System.out.println("The input information is already current.");
@@ -150,8 +150,7 @@ public class SchoolAdminSQL {
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        rs1.close();
-        rs2.close();
+        rs.close();
         st.close();
         sc.close();
     }
@@ -195,7 +194,8 @@ public class SchoolAdminSQL {
                 else {
                 System.out.println("Student with this ID is not registered for this course. Try again.");
             }
-            rs.close();
+            rs1.close();
+            rs2.close();
             st.close();
             sc.close();
             }
@@ -223,7 +223,7 @@ public class SchoolAdminSQL {
             st.executeQuery(add_course_query);
 
             String select_query = "SELECT * FROM COURSE WHERE COURSENUM = '" + COURSE_NUM + "'';";
-            ResultSet rs2 = st.executeQuery(select_query);
+            ResultSet rs = st.executeQuery(select_query);
 
             if(rs.next() == true) {
                 System.out.println("This course is in the system.");
@@ -237,8 +237,7 @@ public class SchoolAdminSQL {
             System.out.println("Error: " + e.getMessage());
         }
         st.close();
-        rs1.close();
-        rs2.close();
+        rs.close();
         sc.close();
     }
 
@@ -257,6 +256,7 @@ public class SchoolAdminSQL {
             st.executeQuery(delete_query);
 
             String select_query = "SELECT * FROM COURSE WHERE COURSENUM = '" + DEL_COURSE_NUM + "' AND DEPTKEY = '" + DEPT_KEY + "';";
+            ResultSet rs = st.executeQuery(select_query);
             if(rs.next() == false) {
                 System.out.println("Course deleted.");
                 return;
@@ -269,8 +269,7 @@ public class SchoolAdminSQL {
             System.out.println("Error: " + e.getMessage());
         }
         st.close();
-        rs1.close();
-        rs2.close();
+        rs.close();
         sc.close();
     }
 }
