@@ -1,6 +1,5 @@
 // Caroline
-// Print & scanner statements to think through logic of how we're getting the
-//  parameters for these methods
+// Print & scanner statements to think through logic of how we're getting the parameters for methods -- ignore
 // WIP
 
 import java.io.*;
