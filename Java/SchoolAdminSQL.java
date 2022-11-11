@@ -16,7 +16,7 @@ public class SchoolAdminSQL {
             //System.out.println("Enter Student ID: ");
             //String stud_id = sc.nextLine();
             
-            String query = "SELECT * FROM STUDENTRECORD WHERE STUDID = '" + stud_id + "';";
+            String query = "SELECT * FROM STUDENTRECORD WHERE STUDID = '" + STUD_ID + "';";
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
