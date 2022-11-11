@@ -28,12 +28,12 @@ public class SchoolAdminSQL {
                 String letter_grade = rs.getString("LETTERGRADE");
                 String semester = rs.getString("SEMESTER");
                 String year = rs.getString("YEAR");
-                System.out.println("Record ID: " + recordId);
-                System.out.println("Student ID: " + studId);
-                System.out.println("Department: " + deptKey);
-                System.out.println("Course Number: " + courseNum);
+                System.out.println("Record ID: " + record_id);
+                System.out.println("Student ID: " + stud_id);
+                System.out.println("Department: " + dept_key);
+                System.out.println("Course Number: " + course_num);
                 System.out.println("Grades: " + grade);
-                System.out.println("Letter Grade: " + letterGrade);
+                System.out.println("Letter Grade: " + letter_grade);
                 System.out.println("Semester: " + semester);
                 System.out.println("Year: " + year);
             }
