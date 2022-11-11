@@ -17,7 +17,6 @@ public class SchoolAdminSQL {
             //System.out.println("Enter Student ID: ");
             //String stud_id = sc.nextLine();
             
-            //String getDeptKey = "SELECT DEPTKEY FROM SCHOOLADMIN WHERE SCHADID = '" + schAdId + "';";
             String query = "SELECT * FROM STUDENTRECORD WHERE STUDID = '" + stud_id + "';";
             ResultSet rs = st.executeQuery(query);
 
@@ -30,14 +29,14 @@ public class SchoolAdminSQL {
                 String letter_grade = rs.getString("LETTERGRADE");
                 String semester = rs.getString("SEMESTER");
                 String year = rs.getString("YEAR");
-                //System.out.println("Record ID: " + recordId);
-                //System.out.println("Student ID: " + studId);
-                //System.out.println("Department: " + deptKey);
-                //System.out.println("Course Number: " + courseNum);
-                //System.out.println("Grades: " + grade);
-                //System.out.println("Letter Grade: " + letterGrade);
-                //System.out.println("Semester: " + semester);
-                //System.out.println("Year: " + year);
+                System.out.println("Record ID: " + recordId);
+                System.out.println("Student ID: " + studId);
+                System.out.println("Department: " + deptKey);
+                System.out.println("Course Number: " + courseNum);
+                System.out.println("Grades: " + grade);
+                System.out.println("Letter Grade: " + letterGrade);
+                System.out.println("Semester: " + semester);
+                System.out.println("Year: " + year);
             }
             rs.close();
             st.close();
@@ -64,10 +63,10 @@ public class SchoolAdminSQL {
                 String f_name = rs.getString("FNAME");
                 String l_name = rs.getString("LNAME");
                 String department = rs.getString("DEPTKEY");
-                //System.out.println("Professor ID: " + prof_id);
-                //System.out.println("First Name: " + f_name);
-                //System.out.println("Last Name: " + l_name);
-                //System.out.println("Department: " + department); 
+                System.out.println("Professor ID: " + prof_id);
+                System.out.println("First Name: " + f_name);
+                System.out.println("Last Name: " + l_name);
+                System.out.println("Department: " + department); 
             }
             rs.close();
             st.close();
@@ -174,11 +173,11 @@ public class SchoolAdminSQL {
                 String course_nums = rs.getString("COURSENUM");
                 String crn = rs.getString("CRN");
                 String grade = rs.getString("GRADE");
-                //System.out.println("Course Number: " + course_num);
-                //System.out.println("CRN: " + crn);
-                //System.out.println("Grade: " + grade);
+                System.out.println("Course Number: " + course_num);
+                System.out.println("CRN: " + crn);
+                System.out.println("Grade: " + grade);
             
-                // Register student for course
+                // Register student for course logic
                 //System.out.println("Enter Course Number: "); 
                 //course_num = sc.nextLine();
                 //System.out.println("Enter CRN: ");
