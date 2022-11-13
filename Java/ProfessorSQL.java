@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class ProfessorSQL{
     //getter for returning the CRN. WIll return null if crn is not found or SQL error. 
-    public static String get_Crn(Connection conn, String coursenum, String sectionnum){
+    public static String getCrn(Connection conn, String coursenum, String sectionnum){
         try{
             Statement st = conn.createStatement();
 
@@ -28,7 +28,7 @@ public class ProfessorSQL{
         
     }
 
-    public void create_Course(Connection conn, String depart,String coursenum, String sectionnum,String profid, String profname, String desc, String semester, String year) throws SQLException, IOException{
+    public void createCourse(Connection conn, String depart,String coursenum, String sectionnum,String profid, String profname, String desc, String semester, String year) throws SQLException, IOException{
 
         try{
             Statement st = conn.createStatement();
@@ -50,7 +50,7 @@ public class ProfessorSQL{
     }
 
     //there is no current course name in course table. We need to add a course name there. 
-    public void update_Course_Name(Connection conn, String COURSENAME, String CRN) throws SQLException{
+    public void updateCourseName(Connection conn, String COURSENAME, String CRN) throws SQLException{
 
         try{
             Statement st = conn.createStatement();
@@ -64,7 +64,7 @@ public class ProfessorSQL{
     }
 
     //updates course description 
-    public void update_Course_Desc(Connection conn, String CRN, String DESC)throws SQLException{
+    public void updateCourseDesc(Connection conn, String CRN, String DESC)throws SQLException{
 
         try{
             Statement st = conn.createStatement();
@@ -79,7 +79,7 @@ public class ProfessorSQL{
     }
 
 
-    public void update_Grades(Connection conn, String STUDID, String CRN, String GRADE) throws SQLException{
+    public void updateGrades(Connection conn, String STUDID, String CRN, String GRADE) throws SQLException{
 
         try{
             Statement st = conn.createStatement();
