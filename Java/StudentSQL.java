@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class StudentSQL {
 
     //student views (needs return objects)
-    public void studentView(Connection conn, int STUDID) throws SQLException, IOException{
+    public void student_View(Connection conn, int STUDID) throws SQLException, IOException{
         try{
         Statement st = conn.createStatement(); 
 
@@ -33,12 +33,12 @@ public class StudentSQL {
 
     }
     //student display courses (not complete)
-    public void showcourses(Connection conn,String depart ) throws SQLException, IOException{
+    public void show_Courses(Connection conn,String DEPART ) throws SQLException, IOException{
         try(
             Statement st = conn.createStatement();
         )
         {
-            String query = "SELECT CRN, COURSENUM, SECTIONNUM, PROFNAME, DESC FROM COURSE WHERE DEPTKEY IN (SELECT DEPTKEY FROM DEPARTMENT WHERE DEPTNAME = '"+depart+"');";
+            String query = "SELECT CRN, COURSENUM, SECTIONNUM, PROFNAME, DESC FROM COURSE WHERE DEPTKEY IN (SELECT DEPTKEY FROM DEPARTMENT WHERE DEPTNAME = '"+DEPART+"');";
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()){
@@ -56,7 +56,7 @@ public class StudentSQL {
 
 
     //student add course (not complete)
-    public void add_course(Connection conn, int STUDID, int CRN, char COURSENUM) throws SQLException, IOException{
+    public void add_Course(Connection conn, int STUDID, int CRN, char COURSENUM) throws SQLException, IOException{
 
         Statement st = conn.createStatement();
         String stud = Integer.toString(STUDID);
@@ -93,7 +93,7 @@ public class StudentSQL {
     }
 
     //student drop class (not finished)
-    public void student_drop(Connection conn, int CRN, int STUDID) throws SQLException{
+    public void student_Drop(Connection conn, int CRN, int STUDID) throws SQLException{
 
         Statement st = conn.createStatement();
         String stud = Integer.toString(STUDID);
