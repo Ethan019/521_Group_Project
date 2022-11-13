@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class ProfessorSQL{
     //getter for returning the CRN. WIll return null if crn is not found or SQL error. 
-    public static String get_crn(Connection conn, String coursenum, String sectionnum){
+    public static String get_Crn(Connection conn, String coursenum, String sectionnum){
         try{
             Statement st = conn.createStatement();
 
@@ -28,7 +28,7 @@ public class ProfessorSQL{
         
     }
 
-    public void create_course(Connection conn, String depart,String coursenum, String sectionnum,String profid, String profname, String desc, String semester, String year) throws SQLException, IOException{
+    public void create_Course(Connection conn, String depart,String coursenum, String sectionnum,String profid, String profname, String desc, String semester, String year) throws SQLException, IOException{
 
         try{
             Statement st = conn.createStatement();
@@ -50,12 +50,12 @@ public class ProfessorSQL{
     }
 
     //there is no current course name in course table. We need to add a course name there. 
-    public void update_course_Name(Connection conn, String coursename, String crn) throws SQLException{
+    public void update_Course_Name(Connection conn, String COURSENAME, String CRN) throws SQLException{
 
         try{
             Statement st = conn.createStatement();
 
-           String query = "UPDATE COURSE SET coursename = '" +coursename+"' WHERE CRN = '"+crn+"';";
+           String query = "UPDATE COURSE SET coursename = '" +COURSENAME+"' WHERE CRN = '"+CRN+"';";
            st.executeUpdate(query);
            st.close();
         } catch(SQLException e){
@@ -64,12 +64,12 @@ public class ProfessorSQL{
     }
 
     //updates course description 
-    public void update_course_desc(Connection conn, String crn, String desc)throws SQLException{
+    public void update_Course_Desc(Connection conn, String CRN, String DESC)throws SQLException{
 
         try{
             Statement st = conn.createStatement();
             
-            String query = "UPDATE COURSE SET DESC = '" +desc+"' WHERE CRN = '"+crn+"';";
+            String query = "UPDATE COURSE SET DESC = '" +DESC+"' WHERE CRN = '"+CRN+"';";
             st.executeUpdate(query);
             st.close();
         } catch(SQLException e){
@@ -79,12 +79,12 @@ public class ProfessorSQL{
     }
 
 
-    public void update_grades(Connection conn, String studid, String crn, String grade) throws SQLException{
+    public void update_Grades(Connection conn, String STUDID, String CRN, String GRADE) throws SQLException{
 
         try{
             Statement st = conn.createStatement();
 
-            String query = "Update REGISTEREDFOR SET Grade ='" +grade+"' WHERE STUDID ='"+studid+"' AND CRN ='"+crn+"';";
+            String query = "Update REGISTEREDFOR SET Grade ='" +GRADE+"' WHERE STUDID ='"+STUDID+"' AND CRN ='"+CRN+"';";
             st.executeUpdate(query);
             st.close();
         }catch (SQLException e){
