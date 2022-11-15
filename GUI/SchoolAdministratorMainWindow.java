@@ -224,6 +224,28 @@ public class SchoolAdministratorMainWindow
 			if (source == MODIFY_STUDENT_REGISTRATION)
 			{
 
+				Object[] options_modify_student_registration =
+				{ "Cancel", "Go" };
+
+				JTextField student_ID_modify_registration = new JTextField();
+
+				student_ID_modify_registration.setDocument(new JTextFieldLimit(20));
+
+				Object[] student_modify_registration =
+				{ "Student ID", student_ID_modify_registration };
+
+				int selection_modify_student_registration = JOptionPane.showOptionDialog(null,
+						student_modify_registration, "Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null,
+						options_modify_student_registration, null);
+
+				/*
+				 * 
+				 * 
+				 * additonal code to grab text information and SQL function HERE
+				 * 
+				 * 
+				 */
+
 			}
 			if (source == ADD_OR_REMOVE_A_STUDENT)
 			{
@@ -296,6 +318,28 @@ public class SchoolAdministratorMainWindow
 			}
 			if (source == SEE_STUDENT_RECORD)
 			{
+
+				Object[] options_see_student_record =
+				{ "Cancel", "Go" };
+
+				JTextField student_ID_see_student_record = new JTextField();
+
+				student_ID_see_student_record.setDocument(new JTextFieldLimit(20));
+
+				Object[] student_modify_registration =
+				{ "Student ID", student_ID_see_student_record };
+
+				int selection_modify_student_registration = JOptionPane.showOptionDialog(null,
+						student_modify_registration, "Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null,
+						options_see_student_record, null);
+
+				/*
+				 * 
+				 * 
+				 * additonal code to grab text information and SQL function HERE
+				 * 
+				 * 
+				 */
 
 			}
 		}

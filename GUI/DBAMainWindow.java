@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public class DBAMainWindow
 {
 	private static JButton MODIFY_STUDENT_TABLES, MODIFY_PROFESSOR_TABLES, MODIFY_SCHOOL_ADMIN_TABLES,
-			MODIFY_COURSE_TABLES, MODIFY_DEPARTMENT_TABLES;
+			MODIFY_COURSE_TABLES, MODIFY_DEPARTMENT_TABLES, ENTER_TERMINAL;
 	String MESSAGE = "Please Select an Option";
 
 	public DBAMainWindow()
@@ -58,6 +58,13 @@ public class DBAMainWindow
 		MODIFY_DEPARTMENT_TABLES.setBackground(Color.DARK_GRAY);
 		MODIFY_DEPARTMENT_TABLES.addActionListener(listener);
 		panel.add(MODIFY_DEPARTMENT_TABLES);
+
+		ENTER_TERMINAL = new JButton("Enter Terminal");
+		ENTER_TERMINAL.setBounds(150, 280, 193, 25);
+		ENTER_TERMINAL.setForeground(Color.WHITE);
+		ENTER_TERMINAL.setBackground(Color.DARK_GRAY);
+		ENTER_TERMINAL.addActionListener(listener);
+		panel.add(ENTER_TERMINAL);
 
 		JFrame frame = new JFrame();
 		frame.setTitle("UNIVERSITY: DATABASE ADMINISTRATOR");
@@ -115,6 +122,16 @@ public class DBAMainWindow
 				 */
 			}
 			if (source == MODIFY_DEPARTMENT_TABLES)
+			{
+				/*
+				 * 
+				 * 
+				 * additonal code to grab text information and SQL function HERE
+				 * 
+				 * 
+				 */
+			}
+			if (source == ENTER_TERMINAL)
 			{
 				/*
 				 * 
