@@ -146,6 +146,7 @@ public class SchoolAdminSQL {
                 System.out.println("Student with this ID is not registered for this course. Try again.");
             }
         }
+    }
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
