@@ -34,13 +34,12 @@ public class SchoolAdminSQL {
                 System.out.println("Semester: " + semester);
                 System.out.println("Year: " + year);
             }
-            rs.close();
-            st.close();
-            sc.close();
         }
         catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        rs.close();
+        st.close();
     }
 
     // Allow admin to view professor info
@@ -60,16 +59,12 @@ public class SchoolAdminSQL {
                 System.out.println("Last Name: " + l_name);
                 System.out.println("Department: " + department); 
             }
-            rs.close();
-            st.close();
-            sc.close();
         }
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
         rs.close();
         st.close();
-        sc.close();
     }
 
     // Allow admin to add student 
@@ -89,7 +84,6 @@ public class SchoolAdminSQL {
         }
         rs.close();
         st.close();
-        sc.close();
     }
 
     // Allow admin to update professor info
@@ -120,7 +114,6 @@ public class SchoolAdminSQL {
         }
         rs.close();
         st.close();
-        sc.close();
     }
 
     // Allow admin to add student to course - add button is selected
@@ -144,29 +137,26 @@ public class SchoolAdminSQL {
 
                 String check = "SELECT * FROM REGISTEREDFOR WHERE CRN = '" + CRN + "' AND STUD_ID = '" + STUD_ID + "';";
                 rs2 = st.executeQuery(check);
+                
                 if(rs2.next() == true) {
-                System.out.println("Student is enrolled in this course.");
-                return;
-            }
+                    System.out.println("Student is enrolled in this course.");
+                    return;
+                }
                 else {
                 System.out.println("Student with this ID is not registered for this course. Try again.");
-            }
-            rs1.close();
-            rs2.close();
-            st.close();
-            sc.close();
             }
         }
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        rs1.close();
+        rs2.close();
+        st.close();
     }
 
     public void DelProfessor(Connection conn, String PROF_ID) {
         try {
             Statement st = conn.createStatement();
-
-            Scanner sc = new Scanner(System.in);
 
             String del_prof = "DELETE FROM PROFESSOR WHERE PROFID = '" + PROF_ID + "';";
             st.executeUpdate(del_prof);
@@ -176,20 +166,20 @@ public class SchoolAdminSQL {
             if(rs.next() == false) {
                 System.out.println("Professor deleted.");
             }
+            else {
+                System.out.println("Try again.");
+            }
         }
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
         st.close();
         rs.close();
-        sc.close();
     }
 
     public void DelStud(Connection conn, String STUD_ID) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
-
-            Scanner sc = new Scanner(System.in);
             
             String del_student = "DELETE FROM STUDENT WHERE STUDID = '" + STUD_ID + "';";
             st.executeUpdate(del_student);
@@ -205,8 +195,8 @@ public class SchoolAdminSQL {
         }
         st.close();
         rs.close();
-        sc.close();
     }
+        
     // Add a course
     public void AddCourse(Connection conn, String DEPARTMENT, String COURSE_NUM, String DESC, String PROF_NAME) throws SQLException, IOException {
         try {
@@ -233,8 +223,8 @@ public class SchoolAdminSQL {
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        st.close();
         rs.close();
+        st.close();
     }
 
     // Delete a course
@@ -269,7 +259,6 @@ public class SchoolAdminSQL {
             String update_query = "UPDATE STUDENT SET FNAME = '" + F_NAME + "', LNAME = '" + L_NAME + "', MAJOR = '" + MAJOR + "' WHERE STUDID = '" + STUD_ID + "';";
             st.executeUpdate(update_query);
 
-
             String select_query = "SELECT * FROM STUDENT WHERE STUDID = '" + stud_id + "';";
             ResultSet rs = st.executeQuery(select_query);
 
@@ -287,7 +276,6 @@ public class SchoolAdminSQL {
         }
         rs.close();
         st.close();
-        //sc.close();
     }
     public void EditProf(Connection conn, Scanner scan, String PROF_ID, String F_NAME, String L_NAME, String DEPARTMENT) throws SQLException, IOException {
         try {
@@ -302,7 +290,6 @@ public class SchoolAdminSQL {
                 System.out.println("Professor added.");
                 return;
             }
-
             else {
                 System.out.println("Try again.");
             }
