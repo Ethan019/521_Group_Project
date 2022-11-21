@@ -9,16 +9,11 @@ import java.util.Random;
 
 public class SchoolAdminSQL {
     // Allow admin to view student record info
-    public static ViewStudRec(Connection conn, int STUD_ID) throws SQLException, IOException {
+    public static ViewStudRec(Connection conn, String STUD_ID) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
-            String stud = Integer.toString(STUD_ID);
-
-            //Scanner sc = new Scanner(System.in);
-            //System.out.println("Enter Student ID: ");
-            //String stud_id = sc.nextLine();
             
-            String query = "SELECT * FROM STUDENTRECORD WHERE STUDID = '" + stud + "';";
+            String query = "SELECT * FROM STUDENTRECORD WHERE STUDID = '" + STUD_ID + "';";
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
