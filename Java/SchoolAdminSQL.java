@@ -1,22 +1,24 @@
 // Caroline
-// Print & scanner statements to think through logic of how we're getting the parameters for methods -- ignore
 // WIP
+// School admin methods
 
 import java.io.*;
 import java.sql.*;
-import java.util.Scanner;
+//import java.util.Scanner;
+import java.util.Random;
 
 public class SchoolAdminSQL {
     // Allow admin to view student record info
-    public static ViewStudRec(Connection conn, String STUD_ID) throws SQLException, IOException {
+    public static ViewStudRec(Connection conn, int STUD_ID) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
+            String stud = Integer.toString(STUD_ID);
 
-            Scanner sc = new Scanner(System.in);
+            //Scanner sc = new Scanner(System.in);
             //System.out.println("Enter Student ID: ");
             //String stud_id = sc.nextLine();
             
-            String query = "SELECT * FROM STUDENTRECORD WHERE STUDID = '" + STUD_ID + "';";
+            String query = "SELECT * FROM STUDENTRECORD WHERE STUDID = '" + stud + "';";
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
@@ -51,18 +53,14 @@ public class SchoolAdminSQL {
         try {
             Statement st = conn.createStatement();
 
-            Scanner sc = new Scanner(System.in);
-            //System.out.println("Please Enter Professor ID: ");
-            //String prof_id = sc.nextLine();
-
-            String query = "SELECT * FROM Professor WHERE PROFID = '" + prof_id + "';";
+            String query = "SELECT * FROM PROFESSOR WHERE PROFID = '" + PROF_ID + "';";
             ResultSet rs = st.executeQuery(query);
 
             while(rs.next()) {
                 String f_name = rs.getString("FNAME");
                 String l_name = rs.getString("LNAME");
                 String department = rs.getString("DEPTKEY");
-                System.out.println("Professor ID: " + prof_id);
+                System.out.println("Professor ID: " + PROF_ID);
                 System.out.println("First Name: " + f_name);
                 System.out.println("Last Name: " + l_name);
                 System.out.println("Department: " + department); 
@@ -74,77 +72,52 @@ public class SchoolAdminSQL {
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        rs.close();
+        st.close();
+        sc.close();
     }
 
-    // Allow admin to update student info
-    public void EditStud(Connection conn, Scanner scan) throws SQLException, IOException {
+    // Allow admin to add student 
+    public void AddStud(Connection conn, String F_NAME, String L_NAME, String MAJOR) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
+            Random rand = new Random();
 
-            Scanner sc = new Scanner(System.in);
-            //System.out.println("Please Enter Student ID to Edit: ");
-            //String stud_id = sc.nextLine();
+            int stud = rand.nextInt(11000000, 11999999);
+            String STUD_ID = Integer.toString(stud);
 
-            String select_query = "SELECT * FROM STUDENT WHERE STUDID = '" + stud_id + "';";
-            ResultSet rs1 = st.executeQuery(select_query);
-
-            //System.out.println("Enter Updated Student Information:");
-            //System.out.println("First Name: ");
-            //String f_name = sc.nextLine();
-            //System.out.println("Last Name: ");
-            //String l_name = sc.nextLine();
-            //System.out.println("Major: ");
-            //String major = sc.nextLine();
-
-            String updateQuery = "UPDATE STUDENT SET FNAME = '" + f_name + "', LNAME = '" + l_name + "', MAJOR = '" + major + "' WHERE STUDID = '" + stud_id + "';";
-            ResultSet rs2 = st.executeQuery(updateQuery);
-
-            if(rs2.hasNext() == true) {
-                System.out.println("The input information is already current.");
-                return;
-            }
-
-            else {
-                System.out.println("Information updated successfully.");
-            }
+            String update_query = "INSERT INTO STUDENT(FNAME, LNAME, MAJOR, STUDID) VALUES('" + F_NAME + "', '" + L_NAME + "', '" + MAJOR + "', '" + STUD_ID + "';";
+            st.executeQuery(update_query);
         }
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        rs1.close();
-        rs2.close();
+        rs.close();
         st.close();
         sc.close();
     }
 
     // Allow admin to update professor info
-    public void EditProf(Connection conn, Scanner scan) throws SQLException, IOException {
+    public void AddProf(Connection conn, String F_NAME, String L_NAME, String DEPT_KEY) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
+            Random rand = new Random();
 
-            Scanner sc = new Scanner(System.in);
-            //System.out.println("Enter ID of Professor to Edit: ");
-            //String prof_id = sc.nextLine();
+            int prof = rand.nextInt(22000000, 22999999);
+            String PROF_ID = Integer.toString(prof);
 
-            //String select_query = "SELECT * FROM PROFESSOR WHERE PROFID = '" + profId + "';";
-            //ResultSet rs1 = st.executeQuery(select_query);
+            String update_query = "INSERT INTO PROFESSOR(FNAME, LNAME, DEPTKEY, PROFID) VALUES '" + F_NAME + "', '" + L_NAME + "', DEPTKEY = '" + DEPT_KEY + "', '" + PROF_ID + "';";
+            st.executeUpdate(update_query);
 
-            //System.out.println("First Name: ");
-            //String f_name = sc.nextLine();
-            //System.out.println("Last Name: ");
-            //String l_name = sc.nextLine();
-            //System.out.println("Department: ");
-            //String department = sc.nextLine();
+            String select_query = "SELECT * FROM PROFESSOR WHERE LNAME = '" + L_NAME + "' AND FNAME = '" + F_NAME + "';";
+            ResultSet rs = st.executeQuery(select_query);
 
-            String update_query = "UPDATE PROFESSOR SET FNAME = '" + f_name + "', LNAME = '" + l_name + "', DEPTKEY = '" + department + "' WHERE PROFID = '" + prof_id + "';";
-            ResultSet rs = st.executeQuery(update_query);
-
-            if(rs.hasNext() == true) {
-                System.out.println("The input information is already current.");
+            if(rs.next() == true) {
+                System.out.println("Professor added.");
                 return;
             }
             else {
-                System.out.println("Information updated successfully.");
+                System.out.println("Try again.");
             }
         }
         catch(SQLException e) {
@@ -160,10 +133,6 @@ public class SchoolAdminSQL {
         try {
             Statement st = conn.createStatement();
 
-            Scanner sc = new Scanner(System.in);
-            //System.out.println("Enter Student ID: ");
-            //String stud_id = sc.nextLine();
-
             // Display registered courses first
             String select_query = "SELECT * FROM REGISTEREDFOR WHERE STUDID = '" + stud_id + "';";
             ResultSet rs1 = st.executeQuery(select_query);
@@ -174,16 +143,9 @@ public class SchoolAdminSQL {
                 System.out.println("Course Number: " + course_num);
                 System.out.println("CRN: " + crn);
                 System.out.println("Grade: " + grade);
-            
-                // Register student for course logic
-                //System.out.println("Enter Course Number: "); 
-                //course_num = sc.nextLine();
-                //System.out.println("Enter CRN: ");
-                //System.out.println("Enter Department: ");
-                //String department = sc.nextLine();
 
                 String add_course = "INSERT INTO REGISTEREDFOR(CRN, COURSENUM) VALUES ('" + CRN + "', '" + COURSE_NUM + "') WHERE STUDID = '" + STUD_ID + "';"; 
-                st.executeQuery(add_course);
+                st.executeUpdate(add_course);
 
                 String check = "SELECT * FROM REGISTEREDFOR WHERE CRN = '" + CRN + "' AND STUD_ID = '" + STUD_ID + "';";
                 rs2 = st.executeQuery(check);
@@ -205,22 +167,62 @@ public class SchoolAdminSQL {
         }
     }
 
+    public void DelProfessor(Connection conn, String PROF_ID) {
+        try {
+            Statement st = conn.createStatement();
+
+            Scanner sc = new Scanner(System.in);
+
+            String del_prof = "DELETE FROM PROFESSOR WHERE PROFID = '" + PROF_ID + "';";
+            st.executeUpdate(del_prof);
+
+            String check = "SELECT * FROM PROFESSOR WHERE PROFID = '" + PROF_ID + "';";
+            ResultSet rs = st.executeQuery(check);
+            if(rs.next() == false) {
+                System.out.println("Professor deleted.");
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        st.close();
+        rs.close();
+        sc.close();
+    }
+
+    public void DelStud(Connection conn, String STUD_ID) throws SQLException, IOException {
+        try {
+            Statement st = conn.createStatement();
+
+            Scanner sc = new Scanner(System.in);
+            
+            String del_student = "DELETE FROM STUDENT WHERE STUDID = '" + STUD_ID + "';";
+            st.executeUpdate(del_student);
+
+            String check = "SELECT * FROM STUDENT WHERE STUDID = '" + STUD_ID + "';";
+            ResultSet rs = st.executeQuery(check);
+            if(rs.next() == false) {
+                System.out.println("Student deleted.");
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        st.close();
+        rs.close();
+        sc.close();
+    }
     // Add a course
     public void AddCourse(Connection conn, String DEPARTMENT, String COURSE_NUM, String DESC, String PROF_NAME) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
 
             Scanner sc = new Scanner(System.in);
-            //System.out.println("Enter Department: ");
-            //String department = sc.nextLine();
-            //System.out.println("Enter New Course Number: ");
-            //String new_course_num = sc.nextLine();
-            //System.out.println("Enter New Course Description (Optional): ");
-            //String desc = sc.nextLine();
-            //System.out.println("Enter Professor Name (Optional): ");
-            //String prof = sc.nextLine();
-            String add_course_query = "INSERT INTO COURSE(DEPTKEY, COURSENUM, PROFNAME, DESC) VALUES ('" + DEPARTMENT + "', '" + COURSE_NUM + "', '" + PROF_NAME + "', '" + DESC + "');";
-            st.executeQuery(add_course_query);
+            Random rand = new Random();
+            int crn = rand.nextInt(1000, 4999);
+
+            String add_course_query = "INSERT INTO COURSE(DEPTKEY, COURSENUM, PROFNAME, DESC, CRN) VALUES ('" + DEPARTMENT + "', '" + COURSE_NUM + "', '" + PROF_NAME + "', '" + DESC + "');";
+            st.executeUpdate(add_course_query);
 
             String select_query = "SELECT * FROM COURSE WHERE COURSENUM = '" + COURSE_NUM + "'';";
             ResultSet rs = st.executeQuery(select_query);
@@ -268,8 +270,73 @@ public class SchoolAdminSQL {
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        st.close();
         rs.close();
+        st.close();
         sc.close();
     }
+
+    public void EditStud(Connection conn, Scanner scan, String STUD_ID, String F_NAME, String L_NAME, String MAJOR) throws SQLException, IOException {
+        try {
+            Statement st = conn.createStatement();
+
+            String update_query = "UPDATE STUDENT SET FNAME = '" + F_NAME + "', LNAME = '" + L_NAME + "', MAJOR = '" + MAJOR + "' WHERE STUDID = '" + STUD_ID + "';";
+            st.executeUpdate(update_query);
+
+
+            String select_query = "SELECT * FROM STUDENT WHERE STUDID = '" + stud_id + "';";
+            ResultSet rs = st.executeQuery(select_query);
+
+            if(rs.next() == true) {
+                System.out.println("The input information is already current.");
+                return;
+            }
+
+            else {
+                System.out.println("Information updated successfully.");
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        rs.close();
+        st.close();
+        //sc.close();
+    }
+    public void EditProf(Connection conn, Scanner scan, String PROF_ID, String F_NAME, String L_NAME, String DEPARTMENT) throws SQLException, IOException {
+        try {
+            Statement st = conn.createStatement();
+
+            String update_query = "UPDATE PROFESSOR SET FNAME = '" + F_NAME + "', LNAME = '" + F_NAME + "', DEPARTMENT = '" + DEPARTMENT + "' WHERE PROFID = '" + PROF_ID + "';";
+            st.executeUpdate(update_query);
+
+            String select_query = "SELECT * FROM PROFESSOR WHERE PROF_ID = '" + PROF_ID + "';";
+            ResultSet rs = st.executeQuery(select_query);
+            if(rs.next() == true) {
+                System.out.println("Professor added.");
+                return;
+            }
+
+            else {
+                System.out.println("Try again.");
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        rs.close();
+        st.close();
+    }
+
 }
+
+// Drop student from course
+// Add course
+// Remove course
+// Add professor
+// Remove professor
+// Add student
+// Delete student
+// View record
+// Edit student
+// Edit professor
+
