@@ -211,12 +211,12 @@ public class SchoolAdminSQL {
     public void AddCourse(Connection conn, String DEPARTMENT, String COURSE_NUM, String DESC, String PROF_NAME) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
-
-            Scanner sc = new Scanner(System.in);
             Random rand = new Random();
+            
             int crn = rand.nextInt(1000, 4999);
+            String CRN = Integer.toString(crn);
 
-            String add_course_query = "INSERT INTO COURSE(DEPTKEY, COURSENUM, PROFNAME, DESC, CRN) VALUES ('" + DEPARTMENT + "', '" + COURSE_NUM + "', '" + PROF_NAME + "', '" + DESC + "');";
+            String add_course_query = "INSERT INTO COURSE(DEPTKEY, COURSENUM, PROFNAME, DESC, CRN) VALUES ('" + DEPARTMENT + "', '" + COURSE_NUM + "', '" + PROF_NAME + "', '" + DESC + "', '" + CRN + "');";
             st.executeUpdate(add_course_query);
 
             String select_query = "SELECT * FROM COURSE WHERE COURSENUM = '" + COURSE_NUM + "'';";
@@ -235,19 +235,12 @@ public class SchoolAdminSQL {
         }
         st.close();
         rs.close();
-        sc.close();
     }
 
     // Delete a course
     public void DeleteCourse(Connection conn, String COURSE_NUM, String DEPT_KEY) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
-            
-            Scanner sc = new Scanner(System.in);
-            //System.out.println("Enter Course Number to Delete: ");
-            //String del_course_num = sc.nextLine();
-            //System.out.println("Enter Department: ");
-            //String department = sc.nextLine();
 
             String delete_query = "DELETE * FROM COURSE WHERE COURSENUM = '" + DEL_COURSE_NUM + "' AND DEPTKEY = '" + DEPT_KEY + "';";
             st.executeQuery(delete_query);
@@ -267,7 +260,6 @@ public class SchoolAdminSQL {
         }
         rs.close();
         st.close();
-        sc.close();
     }
 
     public void EditStud(Connection conn, Scanner scan, String STUD_ID, String F_NAME, String L_NAME, String MAJOR) throws SQLException, IOException {
