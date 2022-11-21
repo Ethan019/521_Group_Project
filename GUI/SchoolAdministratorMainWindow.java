@@ -333,13 +333,28 @@ public class SchoolAdministratorMainWindow
 						student_modify_registration, "Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null,
 						options_see_student_record, null);
 
-				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
-				 * 
-				 * 
-				 */
+				switch (selection_modify_student_registration)
+				{
+				case 0:
+				{
+					break;
+				}
+				case 1:
+				{
+					String stud_id = student_ID_see_student_record.getText();
+
+					CustomOutputStream.main("ADMINISTRATOR: SEE STUDENT RECORD");
+
+					/*
+					 * SQL FUNCTION TO GET STUDENT RECORD FROM stud_id HERE IMPORTANT: information
+					 * designed to be displayed using System.print... Console Output it directed to
+					 * new frame created.
+					 */
+
+					System.out.println("\n" + "!!EXAMPLE OUTPUT!!");
+
+				}
+				}
 
 			}
 		}

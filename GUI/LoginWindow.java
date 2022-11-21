@@ -10,13 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginWindow
 {
 	private static JButton LOGIN, DBA_LOGIN;
 	private static JLabel USERNAME, PASSWORD;
-	private static JTextField USER, PASS;
+	private static JTextField USER;
+	private static JPasswordField PASS;
 
 	public LoginWindow()
 	{
@@ -35,7 +37,7 @@ public class LoginWindow
 		PASSWORD.setBounds(150, 170, 70, 20);
 		panel.add(PASSWORD);
 
-		PASS = new JTextField();
+		PASS = new JPasswordField();
 		PASS.setBounds(150, 190, 193, 28);
 		panel.add(PASS);
 

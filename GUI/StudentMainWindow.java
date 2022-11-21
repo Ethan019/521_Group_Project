@@ -56,13 +56,18 @@ public class StudentMainWindow
 			Object source = event.getSource();
 			if (source == SEE_CURRENT_COURSES)
 			{
+
+				CustomOutputStream.main("STUDENT: SEE CURRENT COURSES");
+
 				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
+				 * IMPORTANT: Designed to be displayed using System.print... Console Output it
+				 * directed to new frame created.
 				 * 
 				 * 
 				 */
+
+				System.out.println("\n" + "!!EXAMPLE OUTPUT!!");
+
 			}
 
 			if (source == MODIFY_COURSE_REGISTRATION)
@@ -82,4 +87,5 @@ public class StudentMainWindow
 	{
 		new StudentMainWindow();
 	}
+
 }
