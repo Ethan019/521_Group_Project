@@ -69,7 +69,7 @@ public class DBALogin
 		frame.setLocation(new Point(500, 300));
 		frame.add(panel);
 		frame.setSize(new Dimension(500, 400));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 
 		RETURN.addActionListener(e ->

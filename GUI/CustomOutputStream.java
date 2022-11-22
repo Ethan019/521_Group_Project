@@ -13,34 +13,39 @@ import javax.swing.JTextArea;
 
 public class CustomOutputStream extends OutputStream
 {
-	private JTextArea textArea;
+	private JTextArea text_area;
+	private boolean is_editable;
 
-	public CustomOutputStream(JTextArea textArea)
+	public CustomOutputStream(JTextArea text_area, boolean is_editable)
 	{
-		this.textArea = textArea;
+		this.text_area = text_area;
+		this.is_editable = is_editable;
 	}
 
 	@Override
 	public void write(int b) throws IOException
 	{
 		// textArea.setText(textArea.getText() + String.valueOf((char) b));
-		textArea.append(String.valueOf((char) b));
-		textArea.setCaretPosition(textArea.getDocument().getLength());
+		text_area.append(String.valueOf((char) b));
+		text_area.setCaretPosition(text_area.getDocument().getLength());
+
+		text_area.setEditable(is_editable);
+		// text_area.setEnabled(is_editable);
 	}
 
-	public static void main(String Title)
+	public static void main(String Title, boolean is_editable)
 	{
 		JFrame student_record_frame = new JFrame(Title);
 		student_record_frame.setSize(450, 350);
 		student_record_frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JTextArea textArea = new JTextArea(50, 40);
-		textArea.setBackground(Color.BLACK);
-		textArea.setForeground(Color.green);
+		textArea.setBackground(Color.GRAY);
+		textArea.setForeground(Color.BLACK);
 		Font f = new Font("Consolas", Font.PLAIN, 12);
 		textArea.setFont(f);
 
-		PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
+		PrintStream printStream = new PrintStream(new CustomOutputStream(textArea, is_editable));
 		System.setOut(printStream);
 		System.setErr(printStream);
 

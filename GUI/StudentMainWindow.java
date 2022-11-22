@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -57,7 +59,7 @@ public class StudentMainWindow
 			if (source == SEE_CURRENT_COURSES)
 			{
 
-				CustomOutputStream.main("STUDENT: SEE CURRENT COURSES");
+				CustomOutputStream.main("STUDENT: SEE CURRENT COURSES", false);
 
 				/*
 				 * IMPORTANT: Designed to be displayed using System.print... Console Output it
@@ -79,6 +81,16 @@ public class StudentMainWindow
 				 * 
 				 * 
 				 */
+				List<String> class_list = new ArrayList<String>();
+
+				for (int i = 0; i < 50; i++)
+				{
+					class_list.add("dummy course " + Integer.toString(i));
+				}
+
+				class_list.set(0, "Select A Course");
+
+				ComboBox.main("STUDENT: MODIFY COURSE REGISTRATION", class_list);
 			}
 		}
 	}

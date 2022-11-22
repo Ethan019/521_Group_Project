@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class DBAMainWindow
@@ -93,43 +94,39 @@ public class DBAMainWindow
 
 			if (source == MODIFY_PROFESSOR_TABLES)
 			{
-				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
-				 * 
-				 * 
-				 */
+				Object[] options1 =
+				{ "Add Professor", "Delete Professor", "Modify Professor" };
+
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Add or Remove student",
+						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
+
 			}
 			if (source == MODIFY_SCHOOL_ADMIN_TABLES)
 			{
-				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
-				 * 
-				 * 
-				 */
+				Object[] options1 =
+				{ "Add Administrator", "Delete Admnistrator", "Modify Administrator" };
+
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Add or Remove student",
+						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
+
 			}
 			if (source == MODIFY_COURSE_TABLES)
 			{
-				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
-				 * 
-				 * 
-				 */
+				Object[] options1 =
+				{ "Add Course", "Delete Course", "Modify Course" };
+
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Add or Remove student",
+						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
+
 			}
 			if (source == MODIFY_DEPARTMENT_TABLES)
 			{
-				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
-				 * 
-				 * 
-				 */
+				Object[] options1 =
+				{ "Add Department", "Delete Department", "Modify Department" };
+
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Add or Remove student",
+						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
+
 			}
 			if (source == ENTER_TERMINAL)
 			{
@@ -140,6 +137,9 @@ public class DBAMainWindow
 				 * 
 				 * 
 				 */
+				CustomOutputStream.main("DBA: TERMINAL", true);
+				System.out.println("hellow");
+
 			}
 		}
 	}
