@@ -119,3 +119,4 @@ INSERT INTO STUDENT(STUDID, FNAME, LNAME, MAJOR) VALUES(1234567, 'Ethan', 'Massi
 insert into course(CRN, DEPTKEY, COURSENUM, SECTIONNUM, PROFID, PROFNAME, DES, SEMESTER, YEAR) VALUES(12345, 'CSCI', 'U321', '01', '6666666','Dr. Lee', 'THIS COURSE SUCKS ASS', 'FA', 2022);
 
 insert into users(USERID, Password, Role) values(1234567, 'EthanPassword', 'Student');
+insert into studentrecord values (00000001, 1234567, 'CSCI', 12345, 100, 'A', 'FA', 2022);
