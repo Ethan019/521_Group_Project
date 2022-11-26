@@ -39,9 +39,10 @@ public class ComboBox extends JFrame implements ActionListener
 		scroll = new JScrollPane();
 		scroll.setHorizontalScrollBarPolicy(scroll.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setVerticalScrollBarPolicy(scroll.VERTICAL_SCROLLBAR_ALWAYS);
-
 		fr.getContentPane().add(scroll);
+
 		fr.setLocation(new Point(500, 300));
+		fr.setAlwaysOnTop(true);
 		fr.setVisible(true);
 	}
 

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -64,11 +65,11 @@ public class LoginWindow
 		frame.setSize(new Dimension(500, 400));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.setAlwaysOnTop(true);
+		// frame.setAlwaysOnTop(true);
 
 		LOGIN.addActionListener(e ->
 		{
-			;
+
 		});
 
 	}
@@ -80,18 +81,47 @@ public class LoginWindow
 			Object source = event.getSource();
 			if (source == LOGIN)
 			{
+				String id = USER.getText(); // here is user id
+				String pw = PASS.getPassword().toString(); // here is password
+
+				// String[] args = { id }; // <-- UNCOMMENT THIS IN FINAL VERSION
+				String[] args =
+				{ "10000000" }; // <-- TEST args, COMMENT THIS OUT IN FINAL VERSION
+
+				boolean is_user = true; // MAKE THIS BOOLEAN TRUE OR FALSE DEPENDING ON IF THEY CAN LOGIN AS A USER OR
+										// NOT
 				/*
 				 * 
 				 * 
-				 * additonal code to grab text information and SQL function HERE
+				 * sql to login to databse here!
 				 * 
 				 * 
 				 */
+
+				if (is_user && args != null)
+				{
+					if (false) // PLACE HOLDER: determine if they are a student
+						StudentMainWindow.main(args);
+
+					if (false) // PLACE HOLDER: determine if they are a professor
+						ProfessorMainWindow.main(args);
+
+					if (true) // PLACE HOLDER: determine if they are schooladmin
+						SchoolAdministratorMainWindow.main(args);
+
+				} else
+				{
+					JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 
 			if (source == DBA_LOGIN)
 			{
+
 				DBALogin.main(null);
+
 			}
 		}
 	}

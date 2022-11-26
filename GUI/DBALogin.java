@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -82,7 +83,7 @@ public class DBALogin
 
 		});
 
-		frame.setAlwaysOnTop(true);
+		// frame.setAlwaysOnTop(true);
 
 	}
 
@@ -93,13 +94,34 @@ public class DBALogin
 			Object source = event.getSource();
 			if (source == LOGIN)
 			{
+				String id = USER.getText(); // here is user id
+				String pw = PASS.getPassword().toString(); // here is password
+				String dbaid = ID.getPassword().toString(); // here is dbaid
+
+				// String[] args = { id }; // <-- UNCOMMENT THIS IN FINAL VERSION
+				String[] args =
+				{ "10000000" }; // <-- TEST args, COMMENT THIS OUT IN FINAL VERSION
+
+				boolean is_user = true; // MAKE THIS BOOLEAN TRUE OR FALSE DEPENDING ON IF THEY CAN LOGIN AS A DBA OR
+										// NOT
 				/*
 				 * 
 				 * 
-				 * additonal code to grab text information and SQL function HERE
+				 * sql to login to databse here!
 				 * 
 				 * 
 				 */
+
+				if (is_user && args != null)
+				{
+
+					DBAMainWindow.main(args);
+
+				} else
+				{
+					JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 
 		}

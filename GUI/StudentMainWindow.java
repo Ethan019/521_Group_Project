@@ -16,12 +16,13 @@ public class StudentMainWindow
 {
 
 	private static JButton SEE_CURRENT_COURSES, MODIFY_COURSE_REGISTRATION;
-	String MESSAGE = "Please Select an Option";
+	private String MESSAGE = "Please Select an Option";
+	private String id;
 
-	public StudentMainWindow()
+	public StudentMainWindow(String id)
 	{
 
-		String MESSAGE = "Please Select an Option";
+		this.id = id;
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -48,6 +49,7 @@ public class StudentMainWindow
 		frame.add(panel);
 		frame.setSize(new Dimension(500, 400));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
 	}
 
@@ -61,43 +63,40 @@ public class StudentMainWindow
 
 				CustomOutputStream.main("STUDENT: SEE CURRENT COURSES", false);
 
+				System.out.println("\n" + "========== Displaying courses for Professor " + id + " ==========");
+				// ==========================================================================
 				/*
-				 * IMPORTANT: Designed to be displayed using System.print... Console Output it
-				 * directed to new frame created.
-				 * 
-				 * 
+				 * what needs to be done: IMPORTANT: Designed to be displayed using
+				 * System.print... Console Output is directed to new frame created. PRINT
+				 * student COURSES HERE
 				 */
-
-				System.out.println("\n" + "!!EXAMPLE OUTPUT!!");
+				// ===========================================================================
 
 			}
 
 			if (source == MODIFY_COURSE_REGISTRATION)
 			{
-				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
-				 * 
-				 * 
-				 */
-				List<String> class_list = new ArrayList<String>();
 
-				for (int i = 0; i < 50; i++)
+				List<String> class_list = new ArrayList<String>();
+				class_list.add("Select A Course");
+
+				for (int i = 1; i < 5; i++) // <-- fill class_list with a students actual classes
 				{
-					class_list.add("dummy course " + Integer.toString(i));
+					class_list.add("dummy course " + Integer.toString(i)); // <--test code delete in final version
 				}
 
-				class_list.set(0, "Select A Course");
-
 				ComboBox.main("STUDENT: MODIFY COURSE REGISTRATION", class_list);
+
+				// what needs to be done:
+				// MODify the combobox class to display register/unregister buttons when class
+				// is selected from drop down list
 			}
 		}
 	}
 
 	public static void main(String args[])
 	{
-		new StudentMainWindow();
+		new StudentMainWindow(args[0]);
 	}
 
 }

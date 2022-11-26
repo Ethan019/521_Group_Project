@@ -16,12 +16,13 @@ public class ProfessorMainWindow
 {
 
 	private static JButton SEE_CURRENT_COURSES, MODIFY_COURSE_GRADES, MODIFY_A_COURSE_DESCRIPTION;
-	String MESSAGE = "Please Select an Option";
+	private String MESSAGE = "Please Select an Option";
+	private String id;
 
-	public ProfessorMainWindow()
+	public ProfessorMainWindow(String id)
 	{
 
-		String MESSAGE = "Please Select an Option";
+		this.id = id;
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -55,6 +56,7 @@ public class ProfessorMainWindow
 		frame.add(panel);
 		frame.setSize(new Dimension(500, 400));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
 	}
 
@@ -65,42 +67,48 @@ public class ProfessorMainWindow
 			Object source = event.getSource();
 			if (source == SEE_CURRENT_COURSES)
 			{
+				CustomOutputStream.main("PROFESSOR: SEE CURRENT COURSES", false);
+
+				System.out.println("\n" + "========== Displaying courses for Professor " + id + " ==========");
+				// ==========================================================================
 				/*
-				 * 
-				 * 
-				 * additonal code to grab text information and SQL function HERE
-				 * 
-				 * 
+				 * IMPORTANT: Designed to be displayed using System.print... Console Output is
+				 * directed to new frame created. PRINT PROFESSOR COURSES HERE
 				 */
+				// ===========================================================================
 			}
 			if (source == MODIFY_COURSE_GRADES)
 			{
 
-				// this list needs to be filled with professors current classes
 				List<String> class_list = new ArrayList<String>();
+				class_list.add("Select a class");
 
-				for (int i = 0; i < 50; i++)
+				// test code, fill up class_list with professors current classes
+				for (int i = 1; i < 5; i++)
 				{
 					class_list.add("dummy class " + Integer.toString(i));
 				}
 
-				class_list.set(0, "Select A Class");
-
 				ComboBox.main("PROFESSOR: MODIFY COURSE GRADES", class_list);
+				// what needs to be done: modify combox box class or make a combobox class to
+				// diplay students and allow their grades to be modify when class is selected
+				// from the drop down
 			}
 
 			if (source == MODIFY_A_COURSE_DESCRIPTION)
 			{
 				List<String> class_list = new ArrayList<String>();
+				class_list.add("Select a class");
 
-				for (int i = 0; i < 50; i++)
+				// test code, fill up class_list with professors current classes
+				for (int i = 1; i < 5; i++)
 				{
 					class_list.add("dummy class " + Integer.toString(i));
 				}
 
-				class_list.set(0, "Select A Class");
-
 				ComboBox.main("PROFESSOR: MODIFY COURSE DESCRIPTION", class_list);
+				// what needs to be done: modify combobox class to display course description
+				// and make it editble
 			}
 
 		}
@@ -108,6 +116,6 @@ public class ProfessorMainWindow
 
 	public static void main(String args[])
 	{
-		new ProfessorMainWindow();
+		new ProfessorMainWindow(args[0]);
 	}
 }

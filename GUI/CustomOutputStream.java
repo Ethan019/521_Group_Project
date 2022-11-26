@@ -40,8 +40,8 @@ public class CustomOutputStream extends OutputStream
 		student_record_frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JTextArea textArea = new JTextArea(50, 40);
-		textArea.setBackground(Color.GRAY);
-		textArea.setForeground(Color.BLACK);
+		textArea.setBackground(Color.BLACK);
+		textArea.setForeground(Color.GREEN);
 		Font f = new Font("Consolas", Font.PLAIN, 12);
 		textArea.setFont(f);
 
@@ -54,6 +54,7 @@ public class CustomOutputStream extends OutputStream
 
 		student_record_frame.add(scroll_panel);
 		student_record_frame.setLocation(new Point(500, 300));
+		student_record_frame.setAlwaysOnTop(true);
 		student_record_frame.setVisible(true);
 	}
 }
