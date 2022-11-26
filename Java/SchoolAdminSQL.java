@@ -95,7 +95,7 @@ public class SchoolAdminSQL {
             int prof = rand.nextInt(22000000, 22999999);
             String PROF_ID = Integer.toString(prof);
 
-            String update_query = "INSERT INTO PROFESSOR(FNAME, LNAME, DEPTKEY, PROFID) VALUES '" + F_NAME + "', '" + L_NAME + "', DEPTKEY = '" + DEPT_KEY + "', '" + PROF_ID + "';";
+            String update_query = "INSERT INTO PROFESSOR(FNAME, LNAME, DEPTKEY, PROFID) VALUES('" + F_NAME + "', '" + L_NAME + "', DEPTKEY = '" + DEPT_KEY + "', '" + PROF_ID + "');";
             st.executeUpdate(update_query);
 
             String select_query = "SELECT * FROM PROFESSOR WHERE LNAME = '" + L_NAME + "' AND FNAME = '" + F_NAME + "';";
@@ -132,7 +132,7 @@ public class SchoolAdminSQL {
                 System.out.println("CRN: " + crn);
                 System.out.println("Grade: " + grade);
 
-                String add_course = "INSERT INTO REGISTEREDFOR(CRN, COURSENUM) VALUES ('" + CRN + "', '" + COURSE_NUM + "') WHERE STUDID = '" + STUD_ID + "';"; 
+                String add_course = "INSERT INTO REGISTEREDFOR(CRN, COURSENUM) VALUES('" + CRN + "', '" + COURSE_NUM + "') WHERE STUDID = '" + STUD_ID + "';"; 
                 st.executeUpdate(add_course);
 
                 String check = "SELECT * FROM REGISTEREDFOR WHERE CRN = '" + CRN + "' AND STUD_ID = '" + STUD_ID + "';";
@@ -207,7 +207,7 @@ public class SchoolAdminSQL {
             int crn = rand.nextInt(1000, 4999);
             String CRN = Integer.toString(crn);
 
-            String add_course_query = "INSERT INTO COURSE(DEPTKEY, COURSENUM, PROFNAME, DESC, CRN) VALUES ('" + DEPARTMENT + "', '" + COURSE_NUM + "', '" + PROF_NAME + "', '" + DESC + "', '" + CRN + "');";
+            String add_course_query = "INSERT INTO COURSE(DEPTKEY, COURSENUM, PROFNAME, DESC, CRN) VALUES('" + DEPARTMENT + "', '" + COURSE_NUM + "', '" + PROF_NAME + "', '" + DESC + "', '" + CRN + "');";
             st.executeUpdate(add_course_query);
 
             String select_query = "SELECT * FROM COURSE WHERE COURSENUM = '" + COURSE_NUM + "'';";
@@ -314,4 +314,3 @@ public class SchoolAdminSQL {
 // View record
 // Edit student
 // Edit professor
-
