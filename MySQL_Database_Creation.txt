@@ -100,6 +100,8 @@ CREATE TABLE 'USERS'(
 'Password' varchar(30) NOT NULL, 
 'Role' varchar(30));
 
+alter table course ADD COLUMN coursename varchar(60) AFTER DEPTKEY;
+
 CREATE USER 'Student' @'sys' IDENTIFIED BY 'StudentPassword';
 CREATE USER 'LOGIN' @ 'sys' IDENTIFIED BY 'Login';
 CREATE USER 'Professor' @'sys' IDENTIFIED BY 'ProfessorPassword';
@@ -120,3 +122,4 @@ insert into course(CRN, DEPTKEY, COURSENUM, SECTIONNUM, PROFID, PROFNAME, DES, S
 
 insert into users(USERID, Password, Role) values(1234567, 'EthanPassword', 'Student');
 insert into studentrecord values (00000001, 1234567, 'CSCI', 12345, 100, 'A', 'FA', 2022);
+
