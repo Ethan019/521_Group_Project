@@ -108,7 +108,7 @@ CREATE USER 'DBADMIN' @'sys' IDENTIFIED BY 'DatabadminPassword';
 
 
 GRANT insert ON sys.registeredfor TO 'Student'@'sys';
-
+GRANT ALL ON sys.studentcor TO 'Student'@'sys';
 
 
 TEST VALUE STATEMENTS
