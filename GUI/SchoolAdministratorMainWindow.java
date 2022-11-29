@@ -5,7 +5,10 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Connection;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -79,9 +82,17 @@ public class SchoolAdministratorMainWindow
 
 	public class ButtonListener implements ActionListener
 	{
+		Connection conn;
 		public void actionPerformed(ActionEvent event) throws IllegalArgumentException
 		{
 			Object source = event.getSource();
+			SchoolAdminSQL SQL = new SchoolAdminSQL();
+			try {
+				conn = DriverManager.getConnection("jdbc:mysql://localhost/sys", "SchoolAdmin", "SchoolPassword");
+			}catch (SQLException e){
+				System.out.println(e.getMessage());
+			}
+			//ADD COURSE WORKS -- TESTED
 			if (source == ADD_OR_REMOVE_A_COURSE)
 			{
 				Object[] options1 =
@@ -98,18 +109,29 @@ public class SchoolAdministratorMainWindow
 					{ "Cancel", "Add" };
 
 					JTextField course_department = new JTextField();
-					JTextField course_ID = new JTextField();
+
 					JTextField course_name = new JTextField();
 					JTextField course_description = new JTextField();
-
+					JTextField course_professor = new JTextField();
+					JTextField course_professorID = new JTextField();
+					JTextField course_semester = new JTextField();
+					JTextField course_year = new JTextField();
+					JTextField course_section = new JTextField();
+					JTextField course_num = new JTextField();
 					course_department.setDocument(new JTextFieldLimit(20));
-					course_ID.setDocument(new JTextFieldLimit(20));
+					course_num.setDocument(new JTextFieldLimit(20));
 					course_name.setDocument(new JTextFieldLimit(20));
 					course_description.setDocument(new JTextFieldLimit(50));
+					course_professor.setDocument(new JTextFieldLimit(20));
+					course_professorID.setDocument(new JTextFieldLimit(20));
+					course_semester.setDocument(new JTextFieldLimit(20));
+					course_year.setDocument(new JTextFieldLimit(20));
+					course_section.setDocument(new JTextFieldLimit(20));
+
 
 					Object[] course_fields_add =
-					{ "Course Department", course_department, "Course ID", course_ID, "Course Name", course_name,
-							"Course Desciption", course_description };
+					{ "Course Department", course_department, "Course Name", course_name, "Course NUM", course_num,
+							"Course Desciption", course_description , "Professor Name", course_professor,"Professor ID", course_professorID, "Semester", course_semester, "Year", course_year, "Section", course_section};
 
 					int selection_add_course = JOptionPane.showOptionDialog(null, course_fields_add,
 							"Enter Course Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_course, null);
@@ -118,17 +140,21 @@ public class SchoolAdministratorMainWindow
 					{
 					case 1:
 						String cd = course_department.getText();
-						String cID = course_ID.getText();
+						String cnum = course_num.getText();
 						String cname = course_name.getText();
 						String cdesc = course_description.getText();
+						String pname = course_professor.getText();
+						String semes = course_semester.getText();
+						String year = course_year.getText();
+						String secn = course_section.getText();
+						String profid = course_professorID.getText();
 
-						// ========================================================
-						//
-						// what needs to be done: SQL FUNCTION TO add course here
-						//
-						// ========================================================
+						// CALLING SQL METHOD
 
-						boolean success = false; // BOOLEAN TO VERIFY COURSE IS ADDED
+
+
+
+						boolean success = SQL.AddCourse(conn, cd, cnum, cname, cdesc, pname, semes, year, secn, profid); // BOOLEAN TO VERIFY COURSE IS ADDED
 
 						if (success)
 						{
@@ -153,7 +179,7 @@ public class SchoolAdministratorMainWindow
 					course_department_delete.setDocument(new JTextFieldLimit(20));
 
 					Object[] course_fields_delete =
-					{ "Course ID", course_ID_delete, "Course Department", course_department_delete };
+					{ "Course CRN", course_ID_delete, };
 
 					int selection_delete_course = JOptionPane.showOptionDialog(null, course_fields_delete,
 							"Enter Course Information", JOptionPane.CANCEL_OPTION, 3, null, options_delete_course,
@@ -162,8 +188,8 @@ public class SchoolAdministratorMainWindow
 					switch (selection_delete_course)
 					{
 					case 1:
-						String cID = course_ID_delete.getText();
-						String cdept = course_department_delete.getText();
+						String CRN = course_ID_delete.getText();
+						String adminid = id;
 
 						// ========================================================
 						//
@@ -171,7 +197,7 @@ public class SchoolAdministratorMainWindow
 						//
 						// ========================================================
 
-						boolean success = false; // BOOLEAN TO VERIFY COURSE IS ADDED/DELETED
+						boolean success = SQL.DeleteCourse(conn, CRN, adminid); // BOOLEAN TO VERIFY COURSE IS ADDED/DELETED
 
 						if (success)
 						{
@@ -454,14 +480,17 @@ public class SchoolAdministratorMainWindow
 
 					CustomOutputStream.main("ADMINISTRATOR: SEE STUDENT RECORD", false);
 
-					/*
-					 * SQL FUNCTION TO GET STUDENT RECORD FROM stud_id HERE IMPORTANT: information
-					 * designed to be displayed using System.print... Console Output it directed to
-					 * new frame created.
-					 */
+
 
 					System.out.println("\n" + "========== Displaying record for student: " + stud_id + " ==========");
-					// print record here
+					try {
+						SQL.ViewStudRec(conn, stud_id);
+					} catch (SQLException e) {
+						throw new RuntimeException(e);
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+
 
 				}
 				}

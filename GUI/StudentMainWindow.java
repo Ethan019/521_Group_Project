@@ -11,7 +11,8 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import java.sql.*;
+import java.util.Objects;
 public class StudentMainWindow
 {
 
@@ -22,7 +23,7 @@ public class StudentMainWindow
 	public StudentMainWindow(String id)
 	{
 
-		this.id = id;
+	this.id = id;
 
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -58,19 +59,21 @@ public class StudentMainWindow
 		public void actionPerformed(ActionEvent event) throws IllegalArgumentException
 		{
 			Object source = event.getSource();
+			StudentSQL SQL = new StudentSQL();
+			Connection conn =null;
+			try {
+				conn = DriverManager.getConnection("jdbc:mysql://localhost/sys", "Student", "StudentPassword");
+			}catch (SQLException e){
+				System.out.println(e.getMessage());
+			}
+
 			if (source == SEE_CURRENT_COURSES)
 			{
 
 				CustomOutputStream.main("STUDENT: SEE CURRENT COURSES", false);
 
 				System.out.println("\n" + "========== Displaying courses for Professor " + id + " ==========");
-				// ==========================================================================
-				/*
-				 * what needs to be done: IMPORTANT: Designed to be displayed using
-				 * System.print... Console Output is directed to new frame created. PRINT
-				 * student COURSES HERE
-				 */
-				// ===========================================================================
+				SQL.student_View(conn, id);
 
 			}
 

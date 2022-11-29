@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +15,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class ProfessorMainWindow
-{
+public class ProfessorMainWindow {
 
 	private static JButton SEE_CURRENT_COURSES, MODIFY_COURSE_GRADES, MODIFY_A_COURSE_DESCRIPTION;
 	private String MESSAGE = "Please Select an Option";
 	private String id;
 
-	public ProfessorMainWindow(String id)
-	{
+	public ProfessorMainWindow(String id) {
 
 		this.id = id;
 
@@ -60,32 +61,32 @@ public class ProfessorMainWindow
 		frame.setVisible(true);
 	}
 
-	public class ButtonListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent event) throws IllegalArgumentException
-		{
+	public class ButtonListener implements ActionListener {
+		Connection conn;
+
+		public void actionPerformed(ActionEvent event) throws IllegalArgumentException {
 			Object source = event.getSource();
-			if (source == SEE_CURRENT_COURSES)
-			{
+
+			ProfessorSQL SQL = new ProfessorSQL();
+
+			try {
+				conn = DriverManager.getConnection("jdbc:mysql://localhost/sys", "Professor", "ProfessorPassword");
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			if (source == SEE_CURRENT_COURSES) {
 				CustomOutputStream.main("PROFESSOR: SEE CURRENT COURSES", false);
 
 				System.out.println("\n" + "========== Displaying courses for Professor " + id + " ==========");
-				// ==========================================================================
-				/*
-				 * IMPORTANT: Designed to be displayed using System.print... Console Output is
-				 * directed to new frame created. PRINT PROFESSOR COURSES HERE
-				 */
-				// ===========================================================================
+				SQL.displayCourses(conn, id);
 			}
-			if (source == MODIFY_COURSE_GRADES)
-			{
+			if (source == MODIFY_COURSE_GRADES) {
 
 				List<String> class_list = new ArrayList<String>();
 				class_list.add("Select a class");
 
 				// test code, fill up class_list with professors current classes
-				for (int i = 1; i < 5; i++)
-				{
+				for (int i = 1; i < 5; i++) {
 					class_list.add("dummy class " + Integer.toString(i));
 				}
 
@@ -95,14 +96,12 @@ public class ProfessorMainWindow
 				// from the drop down
 			}
 
-			if (source == MODIFY_A_COURSE_DESCRIPTION)
-			{
+			if (source == MODIFY_A_COURSE_DESCRIPTION) {
 				List<String> class_list = new ArrayList<String>();
 				class_list.add("Select a class");
 
 				// test code, fill up class_list with professors current classes
-				for (int i = 1; i < 5; i++)
-				{
+				for (int i = 1; i < 5; i++) {
 					class_list.add("dummy class " + Integer.toString(i));
 				}
 
@@ -113,6 +112,7 @@ public class ProfessorMainWindow
 
 		}
 	}
+
 
 	public static void main(String args[])
 	{

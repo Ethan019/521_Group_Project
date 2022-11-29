@@ -13,6 +13,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.sql.*;
+import java.util.Objects;
+
 
 public class LoginWindow
 {
@@ -80,41 +83,42 @@ public class LoginWindow
 		{
 			Object source = event.getSource();
 			if (source == LOGIN)
-			{
-				String id = USER.getText(); // here is user id
-				String pw = PASS.getPassword().toString(); // here is password
-
-				// String[] args = { id }; // <-- UNCOMMENT THIS IN FINAL VERSION
-				String[] args =
-				{ "10000000" }; // <-- TEST args, COMMENT THIS OUT IN FINAL VERSION
-
-				boolean is_user = true; // MAKE THIS BOOLEAN TRUE OR FALSE DEPENDING ON IF THEY CAN LOGIN AS A USER OR
-										// NOT
-				/*
-				 * 
-				 * 
-				 * sql to login to databse here!
-				 * 
-				 * 
-				 */
-
-				if (is_user && args != null)
+			try
 				{
-					if (false) // PLACE HOLDER: determine if they are a student
-						StudentMainWindow.main(args);
+				Connection conn;
+				String id = USER.getText(); // here is user id
+				String pw = PASS.getText(); // here is password
 
-					if (false) // PLACE HOLDER: determine if they are a professor
-						ProfessorMainWindow.main(args);
+				 //String[] args = { id  }; // <-- UNCOMMENT THIS IN FINAL VERSION
+				//String[] args =
+				//{ "10000000" }; // <-- TEST args, COMMENT THIS OUT IN FINAL VERSION
 
-					if (true) // PLACE HOLDER: determine if they are schooladmin
-						SchoolAdministratorMainWindow.main(args);
+				//boolean is_user = true; // MAKE THIS BOOLEAN TRUE OR FALSE DEPENDING ON IF THEY CAN LOGIN AS A USER OR
+										// NOT
+
+				String is_user = UserLogin.UserLogin(id, pw);
+
+				String[] args = {id};
+				if (Objects.equals(is_user, null))
+				{
+					JOptionPane.showMessageDialog(null, "Incorrect Username or Password" + pw + id + is_user, "ERROR",
+							JOptionPane.ERROR_MESSAGE);
 
 				} else
 				{
-					JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "ERROR",
-							JOptionPane.ERROR_MESSAGE);
+					if (Objects.equals(is_user, "Student")) // PLACE HOLDER: determine if they are a student
+
+						StudentMainWindow.main(args);
+
+					if (Objects.equals(is_user, "Professor")) // PLACE HOLDER: determine if they are a professor
+						ProfessorMainWindow.main(args);
+
+					if (Objects.equals(is_user, "SchoolAdmin")) // PLACE HOLDER: determine if they are schooladmin
+						SchoolAdministratorMainWindow.main(args);
 				}
 
+			} catch (SQLException e){
+				System.out.println(e.getErrorCode());
 			}
 
 			if (source == DBA_LOGIN)
