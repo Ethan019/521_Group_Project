@@ -143,7 +143,7 @@ public class SchoolAdminSQL {
 
             if(rs2.next()){
                 String userid = rs2.getString("PROFID");
-                String adduse = "INSERT INTO USERS(USERID, PASSWORD, ROLE) VALUES ("+userid+", '"+Password+"', 'Student');";
+                String adduse = "INSERT INTO USERS(USERID, PASSWORD, ROLE) VALUES ("+userid+", '"+Password+"', 'Professor');";
 
 
                 st.executeUpdate(adduse);
