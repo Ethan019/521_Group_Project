@@ -69,23 +69,63 @@ public class SchoolAdminSQL {
 
     }
 
-    // Allow admin to add student 
-    public void AddStud(Connection conn, String F_NAME, String L_NAME, String MAJOR) throws SQLException, IOException {
+    // Liz: Higher level insertion of new student -- Use this to add NewStudent to the correct tables
+    public void AddNewStudent(Connection conn, String F_NAME, String L_NAME, String MAJOR) throws SQLException, IOException {
+        String Stud_ID = CreateNewStudentId();
+        AddStud(conn, F_NAME, L_NAME, MAJOR, Stud_ID);
+        AddStUser(conn, Stud_ID);
+    }
+
+    public String CreateNewStudentId() {
+        int stud = rand.nextInt(11000000, 11999999);
+        return Integer.toString(stud);
+    }
+
+    // Allow admin to add student to Student Table
+    public void AddStud(Connection conn, String F_NAME, String L_NAME, String MAJOR, String STUD_ID) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
             Random rand = new Random();
 
-           // int stud = rand.nextInt(11000000, 11999999);
-            //String STUD_ID = Integer.toString(stud);
-
             //String update_query = "INSERT INTO STUDENT(FNAME, LNAME, MAJOR, STUDID) VALUES('" + F_NAME + "', '" + L_NAME + "', '" + MAJOR + "', '" + STUD_ID + "';";
            // st.executeQuery(update_query);
+
         }
         catch(SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
 
 
+    }
+
+    //Liz : Add Student to Users Table
+
+    public void AddStUser(Connection conn, String StudId) throws SQLException, IOException {
+        try {
+            Statement st = conn.createStatement();
+
+            String updatequery = "INSERT INTO USERS(USERID, PASSWORD, ROLE) VALUES ('" + StudId + "','ABC123','STUDENT');"
+            st.executeQuery(updatequery);
+        }
+        catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    //Liz : Update User Table with Student Username & PW
+    public void StudPWChange(Connection conn, String UserId, String OldPassword, String NewPassword) throws SQLException, IOException {
+        try {
+            Statement st = conn.CreateStatement;
+
+            //grabs generated StudId
+            String check = "SELECT PASSWORD FROM USERS WHERE USERID = '" + UserId + "'; ";
+            oldpw = st.executeUpdate(check);
+
+            if (oldpw == OldPassword) {
+                String changePW = "UPDATE USERS SET PASSWORD='" + NewPassword + "' WHERE USERID = '" + UserId + "';";
+                st.executeQuery(changePw);
+            }
+        }
     }
 
     // Allow admin to update professor info
