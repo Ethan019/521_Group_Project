@@ -96,34 +96,50 @@ public class DBASQL {
 
     // ********************** STUDENT **********************
     //Add a student
-    public void AddStud(Connection conn, Scanner scan, String F_NAME, String L_NAME, String MAJOR) throws SQLException, IOException {
-        try {
+    //Liz+Ethan edit: Adding student to student table & users table
+    public boolean AddStudent(Connection conn, String F_NAME, String L_NAME, String MAJOR, String Password){
+        try{
             Statement st = conn.createStatement();
-            Random rand = new Random();
 
-            int STUD_ID = rand.nextInt(10000000, 19999999);
-            String stud = Int.toString(STUD_ID);
-            String update_query = "INSERT INTO STUDENT(FNAME, LNAME, MAJOR, STUDID) VALUES ('" + F_NAME + "', '" + L_NAME + "', '" + MAJOR + "', " + stud + ");";
-            st.executeQuery(update_query);
+            //checks for student first
+            String query = "SELECT * FROM STUDENT WHERE FNAME= '"+F_NAME+"' AND LNAME ='"+L_NAME+"' AND MAJOR = '"+MAJOR+"';";
 
-            String select_query = "SELECT * FROM STUDENT WHERE STUDID = '" + STUD_ID + "';";
-            ResultSet rs = st.executeQuery(select_query);
+            ResultSet rs1 = st.executeQuery(query);
 
-            if(rs.next() == true) {
-                System.out.println("Student added.");
-                return;
+            if(!rs1.next()){
+
+                String addstu = "INSERT INTO STUDENT(FNAME, LNAME, MAJOR) VALUES ('"+F_NAME+"', '"+L_NAME+"', '"+MAJOR+"');";
+
+                st.executeUpdate(addstu);
+
+            }else
+            {
+                //uncomment if boolean instead of void
+                return false;
             }
-            else {
-                System.out.println("Try again.");
+
+            String query2 = "SELECT STUDID FROM STUDENT WHERE FNAME= '"+F_NAME+"' AND LNAME ='"+L_NAME+"' AND MAJOR = '"+MAJOR+"';";
+
+
+            ResultSet rs2 = st.executeQuery(query2);
+
+            if(rs2.next()){
+                String userid = rs2.getString("STUDID");
+                String adduse = "INSERT INTO USERS(USERID, PASSWORD, ROLE) VALUES ("+userid+", '"+Password+"', 'Student');";
+
+
+                st.executeUpdate(adduse);
+                //uncomment if returning true.
+                return true;
             }
         }
-        catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+        catch (SQLException e){
+           System.out.println(e.getMessage());
+            return false;
         }
-        rs.close();
-        st.close();
+        return false;
     }
-
+     
     //Delete a student
     public void DelStud(Connection conn, Scanner scan, String STUD_ID) throws SQLException, IOException {
         try {
@@ -211,29 +227,49 @@ public class DBASQL {
     }
     // ******************** PROFESSOR *********************
     // Add professor 
-    public void AddProf(Connection conn, Scanner scan, String F_NAME, String L_NAME, String DEPT_KEY) throws SQLException, IOException {
-        try {
-            Statement st = conn.createStatement();
-            Random rand = new Random();
-
-            int prof = rand.nextInt(22000000, 22999999);
-            String PROF_ID = Integer.toString(prof);
-            String update_query = "INSERT INTO PROFESSOR(FNAME, LNAME, DEPTKEY, PROFID) VALUES ('" + F_NAME + "', '" + L_NAME + "', DEPTKEY = '" + DEPT_KEY + "', '" + PROF_ID + "');";
-            ResultSet rs = st.executeQuery(update_query);
+    //Liz: Adding professor to professor table & users table
     
-            if(rs.next() == true) {
-                System.out.println("Professor added.");
-                return;
+    public boolean AddProfessor(Connection conn, String PROF_NAME, String DEPT_KEY, String Password){
+        try{
+            Statement st = conn.createStatement();
+
+            //checks for prof first
+            String query = "SELECT * FROM PROFESSOR WHERE PROFNAME = '"+PROF_NAME+"' AND DEPTKEY = '"+DEPT_KEY+"';";
+
+            ResultSet rs1 = st.executeQuery(query);
+
+            if(!rs1.next()){
+
+                String addprof = "INSERT INTO PROFESSOR(PROFNAME, DEPTKEY) VALUES ('"+PROF_NAME+"', '"+DEPT_KEY+"');";
+
+                st.executeUpdate(addprof);
+
+            }else
+            {
+                //uncomment if boolean instead of void
+                return false;
             }
-            else {
-                System.out.println("Try again.");
+
+            String query2 = "SELECT PROFID FROM PROFESSOR WHERE PROFNAME= '"+PROF_NAME+"' AND DEPTKEY = '"+DEPT_KEY+"';";
+
+
+            ResultSet rs2 = st.executeQuery(query2);
+
+            if(rs2.next()){
+                String userid = rs2.getString("PROFID");
+                String adduse = "INSERT INTO USERS(USERID, PASSWORD, ROLE) VALUES ("+userid+", '"+Password+"', 'Professor');";
+
+
+                st.executeUpdate(adduse);
+                //uncomment if returning true.
+                return true;
             }
         }
-        catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+        catch (SQLException e){
+           System.out.println(e.getMessage());
+            return false;
         }
-        rs.close();
-        st.close();
+        return false;
     }
 
     //Delete professor
@@ -403,21 +439,49 @@ public class DBASQL {
 
     // ********************** ADMINISTRATOR ****************************
     // Add administrator
-    public void AddAdmin(Connection conn, String F_NAME, String L_NAME, String DEPARTMENT) throws SQLException, IOException {
-        try {
+    //Liz: Adding school administrator to schooladmin table & users table
+    
+    public boolean AddSchAdmin(Connection conn, String F_NAME, String L_NAME, String DEPT_KEY, String Password){
+        try{
             Statement st = conn.createStatement();
-            Random rand = new Random();
-            // Prompt for first name, last name, department 
-            int id = rand.nextInt(33000000, 33999999);
-            String ADMIN_ID = Integer.toString(id);
-            String insert_query = "INSERT INTO SCHADMIN(FNAME, LNAME, DEPARTMENT, SCHADID) VALUES ('" + F_NAME + "', '" + L_NAME + "', '" + DEPARTMENT + "', " + ADMIN_ID + "');";
-            st.executeUpdate(insert_query);
-            System.out.println("Administrator added.");
-        }
-            catch(SQLException e) {
-                System.out.println("Error: " + e.getMessage);
+
+            //checks for schadmin first
+            String query = "SELECT * FROM SCHADMIN WHERE FNAME = '"+F_NAME+"' AND LNAME = '"+L_NAME+"' AND DEPTKEY = '"+DEPT_KEY+"';";
+
+            ResultSet rs1 = st.executeQuery(query);
+
+            if(!rs1.next()){
+
+                String addschad = "INSERT INTO SCHADMIN(FNAME, LNAME, DEPTKEY) VALUES ('"+F_NAME+"', '"+L_NAME+"', '"+DEPT_KEY+"');";
+
+                st.executeUpdate(addschad);
+
+            }else
+            {
+                //uncomment if boolean instead of void
+                return false;
             }
-            st.close();
+
+            String query2 = "SELECT SCHADID FROM SCHOOLADMIN WHERE FNAME= '"+F_NAME+"' AND LNAME = '"+L_NAME+"' AND DEPTKEY = '"+DEPT_KEY+"';";
+
+
+            ResultSet rs2 = st.executeQuery(query2);
+
+            if(rs2.next()){
+                String userid = rs2.getString("SCHADID");
+                String adduse = "INSERT INTO USERS(USERID, PASSWORD, ROLE) VALUES ("+userid+", '"+Password+"', 'SchoolAdmin');";
+
+
+                st.executeUpdate(adduse);
+                //uncomment if returning true.
+                return true;
+            }
+        }
+        catch (SQLException e){
+           System.out.println(e.getMessage());
+            return false;
+        }
+        return false;
     }
 
     // Delete administrator
