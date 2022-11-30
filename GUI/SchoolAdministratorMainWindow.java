@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+//AUTHOR: JARED KEKLAK (UNLESS ANNOTATED)
 public class SchoolAdministratorMainWindow
 {
 
@@ -101,15 +104,20 @@ public class SchoolAdministratorMainWindow
 					JTextField course_ID = new JTextField();
 					JTextField course_name = new JTextField();
 					JTextField course_description = new JTextField();
+					JTextField proff_id = new JTextField();
+					JTextField proff_name = new JTextField();
 
 					course_department.setDocument(new JTextFieldLimit(20));
 					course_ID.setDocument(new JTextFieldLimit(20));
 					course_name.setDocument(new JTextFieldLimit(20));
 					course_description.setDocument(new JTextFieldLimit(50));
+					proff_id.setDocument(new JTextFieldLimit(50));
+					proff_name.setDocument(new JTextFieldLimit(50));
 
 					Object[] course_fields_add =
 					{ "Course Department", course_department, "Course ID", course_ID, "Course Name", course_name,
-							"Course Desciption", course_description };
+							"Course Desciption", course_description, "Professor ID", proff_id, "Professor Name",
+							proff_name };
 
 					int selection_add_course = JOptionPane.showOptionDialog(null, course_fields_add,
 							"Enter Course Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_course, null);
@@ -121,6 +129,8 @@ public class SchoolAdministratorMainWindow
 						String cID = course_ID.getText();
 						String cname = course_name.getText();
 						String cdesc = course_description.getText();
+						String pid = proff_id.getText();
+						String pname = proff_name.getText();
 
 						// ========================================================
 						//
@@ -311,13 +321,93 @@ public class SchoolAdministratorMainWindow
 						student_modify_registration, "Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null,
 						options_modify_student_registration, null);
 
-				// ====================================
-				//
-				// what needs to be done: sql function to find students registered courses and
-				// generate a window/box/frame to display the course with option to allow each
-				// course to be dropped
-				//
-				// =====================================
+				switch (selection_modify_student_registration)
+				{
+				case 0:
+					break;
+				case 1:
+
+					String stud_id = student_ID_modify_registration.getText();
+
+					boolean is_student = true; // sql boolean to determin if student is found or not
+
+					if (is_student)
+					{
+						Object[] options =
+						{ "Add a course", "Drop a course" };
+						int stud_selection = JOptionPane.showOptionDialog(null, MESSAGE,
+								"STUDENT " + stud_id + " Add or Drop a course", JOptionPane.CLOSED_OPTION, 3, null,
+								options, null);
+
+						switch (stud_selection)
+						{
+						case 0:
+							Object[] department_options =
+							{ "Cancel", "Go" };
+
+							JTextField department = new JTextField();
+							department.setDocument(new JTextFieldLimit(20));
+
+							Object[] dept_fields =
+							{ "Department ID", department };
+
+							int department_input = JOptionPane.showOptionDialog(null, dept_fields,
+									"Enter Department Information", JOptionPane.CANCEL_OPTION, 3, null,
+									department_options, null);
+
+							switch (department_input)
+							{
+							case 0:
+								break;
+							case 1:
+								String dept_code = department.getText();
+
+								boolean is_dept = true; // ATTENTION TODO <-- sql boolean to check if code is valid
+														// department
+
+								if (is_dept)
+								{
+									List<String> class_list = new ArrayList<String>();
+									class_list.add("Select A Course");
+
+									for (int i = 1; i < 50; i++) // ATTENTION TODO <-- fill class_list with a
+																	// departments actual
+																	// classes
+									{
+										class_list.add("dummy course " + Integer.toString(i)); // <--test code delete in
+																								// final
+																								// version
+									}
+
+									ComboBox.main("ADMINISTRATOR: MODIFY STUDENT REGISTRATION", class_list,
+											ComboBox.STUDENT_ADD_COURSE);
+								}
+								break;
+							}
+
+							break;
+						case 1:
+							List<String> class_list = new ArrayList<String>();
+							class_list.add("Select A Course");
+
+							for (int i = 1; i < 5; i++) // ATTENTION TODO <-- fill class_list with a students actual
+														// classes
+							{
+								class_list.add("dummy course " + Integer.toString(i)); // <--test code delete in final
+																						// version
+							}
+
+							ComboBox.main("ADMINISTRATOR: MODIFY STUDENT REGISTRATION", class_list,
+									ComboBox.STUDENT_DROP_COURSE);
+							break;
+						}
+					} else
+					{
+						JOptionPane.showMessageDialog(null, "An error occured. Student not found.", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
+					}
+
+				}
 
 			}
 			if (source == ADD_OR_REMOVE_A_STUDENT)
@@ -404,7 +494,7 @@ public class SchoolAdministratorMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO delete professor here
+						// what needs to be done: SQL FUNCTION TO delete zstudent here
 						//
 						// ========================================================
 
@@ -460,7 +550,8 @@ public class SchoolAdministratorMainWindow
 					 * new frame created.
 					 */
 
-					System.out.println("\n" + "========== Displaying record for student: " + stud_id + " ==========");
+					System.out
+							.println("\n" + "============ Displaying record for student: " + stud_id + " ============");
 					// print record here
 
 				}

@@ -10,8 +10,11 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+//AUTHOR: JARED KEKLAK (UNLESS ANNOTATED)
 public class StudentMainWindow
 {
 
@@ -63,7 +66,7 @@ public class StudentMainWindow
 
 				CustomOutputStream.main("STUDENT: SEE CURRENT COURSES", false);
 
-				System.out.println("\n" + "========== Displaying courses for Professor " + id + " ==========");
+				System.out.println("\n" + "========== Displaying courses for student " + id + " ==========");
 				// ==========================================================================
 				/*
 				 * what needs to be done: IMPORTANT: Designed to be displayed using
@@ -77,19 +80,73 @@ public class StudentMainWindow
 			if (source == MODIFY_COURSE_REGISTRATION)
 			{
 
-				List<String> class_list = new ArrayList<String>();
-				class_list.add("Select A Course");
+				Object[] options =
+				{ "Add a course", "Drop a course" };
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Add or Drop a course",
+						JOptionPane.CLOSED_OPTION, 3, null, options, null);
 
-				for (int i = 1; i < 5; i++) // <-- fill class_list with a students actual classes
+				switch (selection)
 				{
-					class_list.add("dummy course " + Integer.toString(i)); // <--test code delete in final version
+				case 0:
+
+					Object[] department_options =
+					{ "Cancel", "Go" };
+
+					JTextField department = new JTextField();
+					department.setDocument(new JTextFieldLimit(20));
+
+					Object[] dept_fields =
+					{ "Department ID", department };
+
+					int department_input = JOptionPane.showOptionDialog(null, dept_fields,
+							"Enter Department Information", JOptionPane.CANCEL_OPTION, 3, null, department_options,
+							null);
+
+					switch (department_input)
+					{
+					case 1:
+						String dept_code = department.getText();
+
+						boolean is_dept = true; // ATTENTION TODO <-- sql boolean to check if code is valid department
+
+						if (is_dept)
+						{
+							List<String> class_list = new ArrayList<String>();
+							class_list.add("Select A Course");
+
+							for (int i = 1; i < 50; i++) // ATTENTION TODO <-- fill class_list with a departments actual
+															// classes
+							{
+								class_list.add("dummy course " + Integer.toString(i)); // <--test code delete in final
+																						// version
+							}
+
+							ComboBox.main("STUDENT: MODIFY COURSE REGISTRATION", class_list,
+									ComboBox.STUDENT_ADD_COURSE);
+						} else
+						{
+							JOptionPane.showMessageDialog(null, "An error occured. Department not found.", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+
+						break;
+					}
+
+					break;
+				case 1:
+					List<String> class_list = new ArrayList<String>();
+					class_list.add("Select A Course");
+
+					for (int i = 1; i < 5; i++) // ATTENTION TODO <-- fill class_list with a students actual classes
+					{
+						class_list.add("dummy course " + Integer.toString(i)); // <--test code delete in final version
+					}
+
+					ComboBox.main("STUDENT: MODIFY COURSE REGISTRATION", class_list, ComboBox.STUDENT_DROP_COURSE);
+					break;
+
 				}
 
-				ComboBox.main("STUDENT: MODIFY COURSE REGISTRATION", class_list);
-
-				// what needs to be done:
-				// MODify the combobox class to display register/unregister buttons when class
-				// is selected from drop down list
 			}
 		}
 	}

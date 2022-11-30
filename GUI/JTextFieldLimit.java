@@ -4,6 +4,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+//AUTHOR: JARED KEKLAK (UNLESS ANNOTATED)
 public class JTextFieldLimit extends PlainDocument
 {
 	private int limit;

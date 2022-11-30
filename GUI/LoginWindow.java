@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+//AUTHOR: JARED KEKLAK (UNLESS ANNOTATED)
 public class LoginWindow
 {
 	private static JButton LOGIN, DBA_LOGIN;
@@ -100,13 +101,13 @@ public class LoginWindow
 
 				if (is_user && args != null)
 				{
-					if (false) // PLACE HOLDER: determine if they are a student
+					if (true) // PLACE HOLDER: determine if they are a student
 						StudentMainWindow.main(args);
 
 					if (false) // PLACE HOLDER: determine if they are a professor
 						ProfessorMainWindow.main(args);
 
-					if (true) // PLACE HOLDER: determine if they are schooladmin
+					if (false) // PLACE HOLDER: determine if they are schooladmin
 						SchoolAdministratorMainWindow.main(args);
 
 				} else

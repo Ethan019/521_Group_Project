@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+//AUTHOR: JARED KEKLAK (UNLESS ANNOTATED)
 public class DBALogin
 {
 	private static JButton LOGIN, RETURN;
