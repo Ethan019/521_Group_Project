@@ -1,38 +1,25 @@
-CREATE OR REPLACE PROCEDURE LetterGrades
+-- Liz: Put into mySQL syntax
 
-AS 
-	theGrade StudentRecord.Grade%TYPE;
-	theID StudentRecord.StudId%TYPE;
-	
-	CURSOR c IS 
-		SELECT StudId, Grade FROM StudentRecord
-		WHERE StudId = :new.StudId;
+DELIMITER $$
+CREATE PROCEDURE LetterAssign(
+	IN GRADE TINYINT(3),
+	IN STUDID INT(7),
+	OUT LETTERGRADE VARCHAR(1)
+	)
 BEGIN
-	OPEN c;
-	LOOP
-		FETCH c INTO theGrade, theID;
-		EXIT WHEN c%NOTFOUND;
-		IF theGrade>=90 THEN
-			update students set lettergrade='A' where ID = theID;
-		ELSIF theGrade>=80 THEN
-			update students set lettergrade='B' where ID = theID;
-		ELSIF theGrade>=70 THEN
-			update students set lettergrade='C' where ID = theID;
-		ELSIF theGrade>=60 THEN
-			update students set lettergrade='D' where ID = theID;
-		ELSE
-			update students set lettergrade='F' where ID = theID;
-		END IF;
-	END LOOP;
-	CLOSE c;
-	CREATE VIEW AlphaGrade AS
-		SELECT * FROM StudentRecord
-		WHERE StudID = :new.StudID;
-	SELECT * FROM AlphaGrade;	
-END;
-.
-run;
+    DECLARE gr TINYINT DEFAULT 0;
+    SELECT GRADE INTO gr FROM STUDENTRECORD WHERE STUDID = '"+STUDID+"';
+    IF gr >= 90 THEN
+    	UPDATE STUDENTRECORD SET LETTERGRADE = "A" WHERE STUDID = '"+STUDID+"';
+    ELSEIF gr >= 80 THEN
+        UPDATE STUDENTRECORD SET LETTERGRADE = "B" WHERE STUDID = '"+STUDID+"';
+    ELSEIF gr >= 70 THEN
+    	UPDATE STUDENTRECORD SET LETTERGRADE = "c" WHERE STUDID = '"+STUDID+"';
+    ELSEIF gr >= 60 THEN
+    	UPDATE STUDENTRECORD SET LETTERGRADE = "D" WHERE STUDID = '"+STUDID+"'; 
+    ELSE
+        UPDATE STUDENTRECORD SET LETTERGRADE = "F" WHERE STUDID = '"+STUDID+"';
+    END IF;
+END$$
+DELIMITER ;
 
-BEGIN Assigngrades; END;
-.
-run;
