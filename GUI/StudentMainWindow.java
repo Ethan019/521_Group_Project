@@ -19,7 +19,7 @@ public class StudentMainWindow
 {
 
 	private static JButton SEE_CURRENT_COURSES, MODIFY_COURSE_REGISTRATION;
-	private String MESSAGE = "Please Select an Option";
+	private String MESSAGE = "Please select an option";
 	private String id;
 
 	public StudentMainWindow(String id)
@@ -32,14 +32,14 @@ public class StudentMainWindow
 
 		ButtonListener listener = new ButtonListener();
 
-		SEE_CURRENT_COURSES = new JButton("See Current Courses");
+		SEE_CURRENT_COURSES = new JButton("See current courses");
 		SEE_CURRENT_COURSES.setBounds(150, 150, 193, 25);
 		SEE_CURRENT_COURSES.setForeground(Color.WHITE);
 		SEE_CURRENT_COURSES.setBackground(Color.DARK_GRAY);
 		SEE_CURRENT_COURSES.addActionListener(listener);
 		panel.add(SEE_CURRENT_COURSES);
 
-		MODIFY_COURSE_REGISTRATION = new JButton("Modify Course Registration");
+		MODIFY_COURSE_REGISTRATION = new JButton("Modify course registration");
 		MODIFY_COURSE_REGISTRATION.setBounds(150, 180, 193, 25);
 		MODIFY_COURSE_REGISTRATION.setForeground(Color.WHITE);
 		MODIFY_COURSE_REGISTRATION.setBackground(Color.DARK_GRAY);
@@ -54,6 +54,8 @@ public class StudentMainWindow
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
+		frame.setResizable(false);
+
 	}
 
 	public class ButtonListener implements ActionListener
@@ -66,7 +68,7 @@ public class StudentMainWindow
 
 				CustomOutputStream.main("STUDENT: SEE CURRENT COURSES", false);
 
-				System.out.println("\n" + "========== Displaying courses for student " + id + " ==========");
+				System.out.println("\n" + "========== displaying courses for student " + id + " ==========");
 				// ==========================================================================
 				/*
 				 * what needs to be done: IMPORTANT: Designed to be displayed using
@@ -99,7 +101,7 @@ public class StudentMainWindow
 					{ "Department ID", department };
 
 					int department_input = JOptionPane.showOptionDialog(null, dept_fields,
-							"Enter Department Information", JOptionPane.CANCEL_OPTION, 3, null, department_options,
+							"Enter department information", JOptionPane.CANCEL_OPTION, 3, null, department_options,
 							null);
 
 					switch (department_input)
@@ -112,7 +114,7 @@ public class StudentMainWindow
 						if (is_dept)
 						{
 							List<String> class_list = new ArrayList<String>();
-							class_list.add("Select A Course");
+							class_list.add(dept_code);
 
 							for (int i = 1; i < 50; i++) // ATTENTION TODO <-- fill class_list with a departments actual
 															// classes
@@ -135,7 +137,7 @@ public class StudentMainWindow
 					break;
 				case 1:
 					List<String> class_list = new ArrayList<String>();
-					class_list.add("Select A Course");
+					class_list.add(id);
 
 					for (int i = 1; i < 5; i++) // ATTENTION TODO <-- fill class_list with a students actual classes
 					{

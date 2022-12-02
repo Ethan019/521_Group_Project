@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,9 +22,12 @@ public class DBAMainWindow
 	private String MESSAGE = "Please Select an Option";
 	private String id;
 
+	public static String CURRENT_STUDENT;
+
 	public DBAMainWindow(String id)
 	{
 
+		this.id = id;
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
@@ -78,6 +83,7 @@ public class DBAMainWindow
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 
 	public class ButtonListener implements ActionListener
@@ -92,8 +98,7 @@ public class DBAMainWindow
 				///
 
 				Object[] options1 =
-				{ "Add Student", "Delete Student", "Modify Student Information", "Modify Student Registration",
-						"Modify Student Grades" };
+				{ "Add Student", "Delete Student", "Modify Student Registration", "Modify Student Grades" };
 
 				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Student Tables",
 						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
@@ -195,29 +200,6 @@ public class DBAMainWindow
 					break;
 
 				case 2:
-					Object[] option_modify_student_info =
-					{ "Cancel", "Go" };
-
-					JTextField student_ID_modify = new JTextField();
-
-					student_ID_modify.setDocument(new JTextFieldLimit(20));
-
-					Object[] student_modify_info =
-					{ "Student ID", student_ID_modify };
-
-					int selection_modify_student_info = JOptionPane.showOptionDialog(null, student_modify_info,
-							"Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null, option_modify_student_info, null);
-					// ================
-					//
-					// what needs to be done: sql function to get student information
-					// and generate a window/box/frame to display this information and allow it to
-					// be modified. along with submit and cancel buttons to finalize changes to the
-					// database
-					//
-					// ================
-
-					break;
-				case 3:
 
 					Object[] option_modify_student_registration =
 					{ "Cancel", "Go" };
@@ -233,16 +215,99 @@ public class DBAMainWindow
 							student_modify_registration, "Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null,
 							option_modify_student_registration, null);
 
-					// ====================================
-					//
-					// what needs to be done: sql function to find students registered courses and
-					// generate a window/box/frame to display the course with option to allow each
-					// course to be dropped
-					//
-					// =====================================
+					switch (selection_modify_student_registration)
+					{
+					case 0:
+						break;
+					case 1:
+
+						String stud_id = student_ID_registration.getText();
+						CURRENT_STUDENT = stud_id;
+
+						boolean is_student = true; // sql boolean to determin if student is found or not
+
+						if (is_student)
+						{
+							Object[] options =
+							{ "Add a Course", "Drop a Course" };
+							int stud_selection = JOptionPane.showOptionDialog(null, MESSAGE,
+									"STUDENT " + stud_id + " Add or Drop a course", JOptionPane.CLOSED_OPTION, 3, null,
+									options, null);
+
+							switch (stud_selection)
+							{
+							case 0:
+								Object[] department_options =
+								{ "Cancel", "Go" };
+
+								JTextField department = new JTextField();
+								department.setDocument(new JTextFieldLimit(20));
+
+								Object[] dept_fields =
+								{ "Department ID", department };
+
+								int department_input = JOptionPane.showOptionDialog(null, dept_fields,
+										"Enter Department Information", JOptionPane.CANCEL_OPTION, 3, null,
+										department_options, null);
+
+								switch (department_input)
+								{
+								case 0:
+									break;
+								case 1:
+									String dept_code = department.getText();
+
+									boolean is_dept = true; // ATTENTION TODO <-- sql boolean to check if code is valid
+															// department
+
+									if (is_dept)
+									{
+										List<String> class_list = new ArrayList<String>();
+										class_list.add(dept_code);
+
+										for (int i = 1; i < 50; i++) // ATTENTION TODO <-- fill class_list with a
+																		// departments actual
+																		// classes
+										{
+											class_list.add("dummy course " + Integer.toString(i)); // <--test code
+																									// delete in
+																									// final
+																									// version
+										}
+
+										ComboBox.main("DBA: MODIFY STUDENT REGISTRATION", class_list,
+												ComboBox.DBA_STUDENT_ADD_COURSE);
+									}
+									break;
+								}
+
+								break;
+							case 1:
+								List<String> class_list = new ArrayList<String>();
+								class_list.add(stud_id);
+
+								for (int i = 1; i < 5; i++) // ATTENTION TODO <-- fill class_list with a students actual
+															// classes
+								{
+									class_list.add("dummy course " + Integer.toString(i)); // <--test code delete in
+																							// final
+																							// version
+								}
+
+								ComboBox.main("DBA: MODIFY STUDENT REGISTRATION", class_list,
+										ComboBox.DBA_STUDENT_DROP_COURSE);
+								break;
+							}
+						} else
+						{
+							JOptionPane.showMessageDialog(null, "An error occured. Student not found.", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+
+					}
 
 					break;
-				case 4:
+				case 3:
 
 					Object[] option_modify_student_grades =
 					{ "Cancel", "Go" };
@@ -257,14 +322,24 @@ public class DBAMainWindow
 					int selection_modify_student_grades = JOptionPane.showOptionDialog(null, student_modify_grades,
 							"Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null, option_modify_student_grades, null);
 
-					// =============================
-					//
-					// what needs to be done: sql function to get students courses and their grades
-					// for each course. generate a window/box/frame with each course listed and a
-					// box to modify the letter grade of each course. along with a submit button to
-					// finalie the changes and send them to the database
-					//
-					// =================================
+					boolean student_found = true; // sql boolean to determin if student is found
+					if (student_found)
+					{
+						List<String> class_list = new ArrayList<String>();
+						class_list.add(student_ID_grades.getText());
+
+						// test code, fill up class_list with students current classes
+						for (int i = 1; i < 5; i++)
+						{
+							class_list.add("dummy class " + Integer.toString(i));
+						}
+
+						ComboBox.main("DBA: MODIFY STUDENT GRADES", class_list, ComboBox.DBA_MODIFY_STUDENT_GRADES);
+					} else
+					{
+						JOptionPane.showMessageDialog(null, "An error occured. Student not found.", "ERROR",
+								JOptionPane.ERROR_MESSAGE);
+					}
 
 					break;
 
@@ -278,7 +353,7 @@ public class DBAMainWindow
 			if (source == MODIFY_PROFESSOR_TABLES)
 			{
 				Object[] options =
-				{ "Add Professor", "Delete Professor", "Modify Professor" };
+				{ "Add Professor", "Delete Professor" };
 
 				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Professor Tables",
 						JOptionPane.CLOSED_OPTION, 3, null, options, null);
@@ -380,49 +455,121 @@ public class DBAMainWindow
 
 					break;
 
-				case 2:
-
-					Object[] options_modify_professor =
-					{ "Cancel", "Go" };
-
-					JTextField professor_faculty_ID_modify = new JTextField();
-
-					professor_faculty_ID_modify.setDocument(new JTextFieldLimit(20));
-
-					Object[] professor_fields_modify =
-					{ "Faculty ID", professor_faculty_ID_modify };
-
-					int selection_modify_professor = JOptionPane.showOptionDialog(null, professor_fields_modify,
-							"Enter Professor ID", JOptionPane.CANCEL_OPTION, 3, null, options_modify_professor, null);
-
-					/*
-					 * 
-					 * 
-					 * what needs to be done: window generated to display professors information and
-					 * allow modifcation. along with cancel/submit buttons in to finalize the
-					 * changes in the db
-					 * 
-					 * 
-					 */
-
-					break;
-
 				}
 
 			}
 			if (source == MODIFY_SCHOOL_ADMIN_TABLES)
 			{
 				Object[] options1 =
-				{ "Add Administrator", "Delete Admnistrator", "Modify Administrator" };
+				{ "Add Administrator", "Delete Admnistrator" };
 
 				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify School Administrator Tables",
 						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
+
+				switch (selection)
+				{
+				case 0:
+
+					Object[] options_add_admin =
+					{ "Cancel", "Add" };
+
+					JTextField admin_first_name = new JTextField();
+					JTextField admin_last_name = new JTextField();
+					JTextField admin_faculty_ID = new JTextField();
+					JTextField admin_department_ID = new JTextField();
+
+					admin_first_name.setDocument(new JTextFieldLimit(20));
+					admin_last_name.setDocument(new JTextFieldLimit(20));
+					admin_faculty_ID.setDocument(new JTextFieldLimit(20));
+					admin_department_ID.setDocument(new JTextFieldLimit(20));
+
+					Object[] admin_fields_add =
+					{ "First Name", admin_first_name, "Last Name", admin_last_name, "Faculty ID", admin_faculty_ID,
+							"Department ID", admin_department_ID };
+
+					int selection_add_admin = JOptionPane.showOptionDialog(null, admin_fields_add,
+							"Enter Administrator Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_admin,
+							null);
+
+					switch (selection_add_admin)
+					{
+					case 1:
+						String afname = admin_first_name.getText();
+						String alname = admin_last_name.getText();
+						String afID = admin_faculty_ID.getText();
+						String adeptID = admin_department_ID.getText();
+
+						// ========================================================
+						//
+						// what needs to be done: SQL FUNCTION TO add professor here
+						//
+						// ========================================================
+
+						boolean success = false; // BOOLEAN TO VERIFY professor IS ADDED/DELETED
+
+						if (success)
+						{
+							JOptionPane.showMessageDialog(null, "Administrator added.", "Success",
+									JOptionPane.WARNING_MESSAGE);
+						} else
+						{
+							JOptionPane.showMessageDialog(null, "An error occured. Administrator not added.", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						break;
+
+					}
+					break;
+
+				case 1:
+
+					Object[] options_delete_admin =
+					{ "Cancel", "Delete" };
+
+					JTextField admin_faculty_ID_delete = new JTextField();
+
+					admin_faculty_ID_delete.setDocument(new JTextFieldLimit(20));
+
+					Object[] admin_fields_delete =
+					{ "Faculty ID", admin_faculty_ID_delete };
+
+					int selection_delete_admin = JOptionPane.showOptionDialog(null, admin_fields_delete,
+							"Enter Administrator ID", JOptionPane.CANCEL_OPTION, 3, null, options_delete_admin, null);
+
+					switch (selection_delete_admin)
+					{
+					case 1:
+						String afID = admin_faculty_ID_delete.getText();
+
+						// ========================================================
+						//
+						// what needs to be done: SQL FUNCTION TO delete professor here
+						//
+						// ========================================================
+
+						boolean success = false; // BOOLEAN TO VERIFY professor IS ADDED/DELETED
+
+						if (success)
+						{
+							JOptionPane.showMessageDialog(null, "Administrator deleted.", "Success",
+									JOptionPane.WARNING_MESSAGE);
+						} else
+						{
+							JOptionPane.showMessageDialog(null, "An error occured. Administrator not deleted.", "ERROR",
+									JOptionPane.ERROR_MESSAGE);
+						}
+						break;
+					}
+
+					break;
+
+				}
 
 			}
 			if (source == MODIFY_COURSE_TABLES)
 			{
 				Object[] options =
-				{ "Add Course", "Delete Course", "Modify Course" };
+				{ "Add Course", "Delete Course" };
 
 				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Course Tables",
 						JOptionPane.CLOSED_OPTION, 3, null, options, null);
@@ -524,42 +671,13 @@ public class DBAMainWindow
 
 					break;
 
-				case 2:
-					Object[] options_modify_course =
-					{ "Cancel", "Go" };
-
-					JTextField course_ID_modify = new JTextField();
-					JTextField course_department_modify = new JTextField();
-
-					course_ID_modify.setDocument(new JTextFieldLimit(20));
-					course_department_modify.setDocument(new JTextFieldLimit(20));
-
-					Object[] course_fields_modify =
-					{ "Course ID", course_ID_modify, "Course Department", course_department_modify };
-
-					int selection_modify_course = JOptionPane.showOptionDialog(null, course_fields_modify,
-							"Enter Course Information", JOptionPane.CANCEL_OPTION, 3, null, options_modify_course,
-							null);
-
-					/*
-					 * 
-					 * 
-					 * what needs to be done: SQL function to collect course information and display
-					 * it in a window/box/frame and allow modification to information. along with a
-					 * cancel and submit button to finalize changes to database
-					 * 
-					 * 
-					 */
-
-					break;
-
 				}
 
 			}
 			if (source == MODIFY_DEPARTMENT_TABLES)
 			{
 				Object[] options1 =
-				{ "Add Department", "Delete Department", "Modify Department" };
+				{ "Add Department", "Delete Department" };
 
 				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Department Tables",
 						JOptionPane.CLOSED_OPTION, 3, null, options1, null);
@@ -646,44 +764,12 @@ public class DBAMainWindow
 					}
 
 					break;
-
-				case 2:
-					Object[] options_modify_department =
-					{ "Cancel", "Go" };
-
-					JTextField department_ID_modify = new JTextField();
-					// JTextField course_department_modify = new JTextField();
-
-					department_ID_modify.setDocument(new JTextFieldLimit(20));
-					// course_department_modify.setDocument(new JTextFieldLimit(20));
-
-					Object[] department_fields_modify =
-					{ "Department ID", department_ID_modify };// "Course Department", course_department_modify };
-
-					int selection_modify_department = JOptionPane.showOptionDialog(null, department_fields_modify,
-							"Enter Department Information", JOptionPane.CANCEL_OPTION, 3, null,
-							options_modify_department, null);
-					/*
-					 * 
-					 * 
-					 * what needs to be done: SQL function to collect department information and
-					 * display it in a window/box/frame and allow modification to information. along
-					 * with a cancel and submit button to finalize changes to database
-					 * 
-					 * 
-					 */
-
-					break;
 				}
 
 			}
 			if (source == ENTER_TERMINAL)
 			{
-				// ?
-
-				CustomOutputStream.main("DBA: TERMINAL", true);
-				System.out.println("hellow");
-
+				DBATerminal.main();
 			}
 		}
 	}

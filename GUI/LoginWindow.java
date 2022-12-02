@@ -67,6 +67,7 @@ public class LoginWindow
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		// frame.setAlwaysOnTop(true);
+		frame.setResizable(false);
 
 		LOGIN.addActionListener(e ->
 		{
@@ -101,18 +102,18 @@ public class LoginWindow
 
 				if (is_user && args != null)
 				{
-					if (true) // PLACE HOLDER: determine if they are a student
+					if (true) // PLACE HOLDER: determine if they are a student DONE
 						StudentMainWindow.main(args);
 
-					if (false) // PLACE HOLDER: determine if they are a professor
+					if (true) // PLACE HOLDER: determine if they are a professor DONE
 						ProfessorMainWindow.main(args);
 
-					if (false) // PLACE HOLDER: determine if they are schooladmin
+					if (true) // PLACE HOLDER: determine if they are schooladmin
 						SchoolAdministratorMainWindow.main(args);
 
 				} else
 				{
-					JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "ERROR",
+					JOptionPane.showMessageDialog(null, "Incorrect username or password", "ERROR",
 							JOptionPane.ERROR_MESSAGE);
 				}
 

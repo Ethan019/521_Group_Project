@@ -73,6 +73,7 @@ public class DBALogin
 		frame.setSize(new Dimension(500, 400));
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setResizable(false);
 
 		RETURN.addActionListener(e ->
 		{

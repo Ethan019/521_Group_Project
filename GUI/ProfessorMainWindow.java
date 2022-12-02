@@ -59,6 +59,7 @@ public class ProfessorMainWindow
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 
 	public class ButtonListener implements ActionListener
@@ -70,7 +71,7 @@ public class ProfessorMainWindow
 			{
 				CustomOutputStream.main("PROFESSOR: SEE CURRENT COURSES", false);
 
-				System.out.println("\n" + "========== Displaying courses for professor " + id + " ==========");
+				System.out.println("\n" + "========== displaying courses for professor " + id + " ==========");
 				// ==========================================================================
 				/*
 				 * IMPORTANT: Designed to be displayed using System.print... Console Output is
@@ -82,7 +83,7 @@ public class ProfessorMainWindow
 			{
 
 				List<String> class_list = new ArrayList<String>();
-				class_list.add("Select a class");
+				class_list.add("Select a course");
 
 				// test code, fill up class_list with professors current classes
 				for (int i = 1; i < 5; i++)
@@ -91,15 +92,13 @@ public class ProfessorMainWindow
 				}
 
 				ComboBox.main("PROFESSOR: MODIFY COURSE GRADES", class_list, ComboBox.PROFESSOR_MODIFY_COURSE_GRADES);
-				// what needs to be done: modify combox box class or make a combobox class to
-				// diplay students and allow their grades to be modify when class is selected
-				// from the drop down
+
 			}
 
 			if (source == MODIFY_A_COURSE_DESCRIPTION)
 			{
 				List<String> class_list = new ArrayList<String>();
-				class_list.add("Select a class");
+				class_list.add("Select a course");
 
 				// test code, fill up class_list with professors current classes
 				for (int i = 1; i < 5; i++)

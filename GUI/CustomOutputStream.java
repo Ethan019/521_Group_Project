@@ -58,5 +58,6 @@ public class CustomOutputStream extends OutputStream
 		frame.setLocation(new Point(500, 300));
 		frame.setAlwaysOnTop(true);
 		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 }

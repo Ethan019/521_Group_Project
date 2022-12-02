@@ -24,6 +24,8 @@ public class SchoolAdministratorMainWindow
 	private String MESSAGE = "Please Select an Option";
 	private String id;
 
+	public static String CURRENT_STUDENT;
+
 	public SchoolAdministratorMainWindow(String id)
 	{
 
@@ -88,9 +90,9 @@ public class SchoolAdministratorMainWindow
 			if (source == ADD_OR_REMOVE_A_COURSE)
 			{
 				Object[] options1 =
-				{ "Add Course", "Remove Course" };
+				{ "Add course", "Remove course" };
 
-				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Offered Courses",
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify offered courses",
 						JOptionPane.DEFAULT_OPTION, 3, null, options1, null);
 
 				switch (selection)
@@ -145,7 +147,7 @@ public class SchoolAdministratorMainWindow
 							JOptionPane.showMessageDialog(null, "Class added.", "Success", JOptionPane.WARNING_MESSAGE);
 						} else
 						{
-							JOptionPane.showMessageDialog(null, "An Error Occured. Course not added.", "ERROR",
+							JOptionPane.showMessageDialog(null, "An error occured. Course not added.", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 						}
 					}
@@ -166,7 +168,7 @@ public class SchoolAdministratorMainWindow
 					{ "Course ID", course_ID_delete, "Course Department", course_department_delete };
 
 					int selection_delete_course = JOptionPane.showOptionDialog(null, course_fields_delete,
-							"Enter Course Information", JOptionPane.CANCEL_OPTION, 3, null, options_delete_course,
+							"Enter course information", JOptionPane.CANCEL_OPTION, 3, null, options_delete_course,
 							null);
 
 					switch (selection_delete_course)
@@ -203,7 +205,7 @@ public class SchoolAdministratorMainWindow
 				Object[] options1 =
 				{ "Add Professor", "Remove Professor" };
 
-				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify Faculty",
+				int selection = JOptionPane.showOptionDialog(null, MESSAGE, "Modify faculty",
 						JOptionPane.DEFAULT_OPTION, 3, null, options1, null);
 
 				switch (selection)
@@ -228,7 +230,7 @@ public class SchoolAdministratorMainWindow
 							professor_faculty_ID, "Department ID", professor_department_ID };
 
 					int selection_add_professor = JOptionPane.showOptionDialog(null, professor_fields_add,
-							"Enter Professor Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_professor,
+							"Enter professor information", JOptionPane.CANCEL_OPTION, 3, null, options_add_professor,
 							null);
 
 					switch (selection_add_professor)
@@ -318,7 +320,7 @@ public class SchoolAdministratorMainWindow
 				{ "Student ID", student_ID_modify_registration };
 
 				int selection_modify_student_registration = JOptionPane.showOptionDialog(null,
-						student_modify_registration, "Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null,
+						student_modify_registration, "Enter student ID", JOptionPane.CANCEL_OPTION, 3, null,
 						options_modify_student_registration, null);
 
 				switch (selection_modify_student_registration)
@@ -328,13 +330,14 @@ public class SchoolAdministratorMainWindow
 				case 1:
 
 					String stud_id = student_ID_modify_registration.getText();
+					CURRENT_STUDENT = stud_id;
 
 					boolean is_student = true; // sql boolean to determin if student is found or not
 
 					if (is_student)
 					{
 						Object[] options =
-						{ "Add a course", "Drop a course" };
+						{ "Add a Course", "Drop a Course" };
 						int stud_selection = JOptionPane.showOptionDialog(null, MESSAGE,
 								"STUDENT " + stud_id + " Add or Drop a course", JOptionPane.CLOSED_OPTION, 3, null,
 								options, null);
@@ -368,7 +371,7 @@ public class SchoolAdministratorMainWindow
 								if (is_dept)
 								{
 									List<String> class_list = new ArrayList<String>();
-									class_list.add("Select A Course");
+									class_list.add(dept_code);
 
 									for (int i = 1; i < 50; i++) // ATTENTION TODO <-- fill class_list with a
 																	// departments actual
@@ -380,7 +383,7 @@ public class SchoolAdministratorMainWindow
 									}
 
 									ComboBox.main("ADMINISTRATOR: MODIFY STUDENT REGISTRATION", class_list,
-											ComboBox.STUDENT_ADD_COURSE);
+											ComboBox.ADMIN_STUDENT_ADD_COURSE);
 								}
 								break;
 							}
@@ -388,7 +391,7 @@ public class SchoolAdministratorMainWindow
 							break;
 						case 1:
 							List<String> class_list = new ArrayList<String>();
-							class_list.add("Select A Course");
+							class_list.add(stud_id);
 
 							for (int i = 1; i < 5; i++) // ATTENTION TODO <-- fill class_list with a students actual
 														// classes
@@ -398,7 +401,7 @@ public class SchoolAdministratorMainWindow
 							}
 
 							ComboBox.main("ADMINISTRATOR: MODIFY STUDENT REGISTRATION", class_list,
-									ComboBox.STUDENT_DROP_COURSE);
+									ComboBox.ADMIN_STUDENT_DROP_COURSE);
 							break;
 						}
 					} else
@@ -440,7 +443,7 @@ public class SchoolAdministratorMainWindow
 							"Student Classification", student_classification };
 
 					int selection_add_student = JOptionPane.showOptionDialog(null, student_fields_add,
-							"Enter student Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_student, null);
+							"Enter student information", JOptionPane.CANCEL_OPTION, 3, null, options_add_student, null);
 
 					switch (selection_add_student)
 					{
@@ -485,7 +488,7 @@ public class SchoolAdministratorMainWindow
 					{ "Student ID", student_ID_delete };
 
 					int selection_delete_student = JOptionPane.showOptionDialog(null, student_fields_delete,
-							"Enter Student ID", JOptionPane.CANCEL_OPTION, 3, null, options_delete_student, null);
+							"Enter student ID", JOptionPane.CANCEL_OPTION, 3, null, options_delete_student, null);
 
 					switch (selection_delete_student)
 					{
