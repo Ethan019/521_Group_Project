@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
+//AUTHOR: JARED KEKLAK (UNLESS ANNOTATED)
 public class DBATerminal
 {
 
