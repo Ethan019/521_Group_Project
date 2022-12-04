@@ -84,6 +84,10 @@ public class DBAMainWindow
 		public void actionPerformed(ActionEvent event) throws IllegalArgumentException
 		{
 			Object source = event.getSource();
+			DBASQL SQL = new DBASQL();
+			
+			Connection conn = DBALogin.New_Login("DataAdmin", "DataAdminPassword");
+			
 			if (source == MODIFY_STUDENT_TABLES)
 			{
 				///
@@ -107,16 +111,16 @@ public class DBAMainWindow
 					JTextField student_first_name = new JTextField();
 					JTextField student_last_name = new JTextField();
 					JTextField student_ID = new JTextField();
-					JTextField student_classification = new JTextField();
+					JTextField student_major = new JTextField();
 
 					student_first_name.setDocument(new JTextFieldLimit(20));
 					student_last_name.setDocument(new JTextFieldLimit(20));
 					student_ID.setDocument(new JTextFieldLimit(20));
-					student_classification.setDocument(new JTextFieldLimit(20));
+					student_major.setDocument(new JTextFieldLimit(20));
 
 					Object[] student_fields_add =
 					{ "First Name", student_first_name, "Last Name", student_last_name, "Student ID", student_ID,
-							"Student Classification", student_classification };
+							"Student Major", student_major };
 
 					int selection_add_student = JOptionPane.showOptionDialog(null, student_fields_add,
 							"Enter student Information", JOptionPane.CANCEL_OPTION, 3, null, options_add_student, null);
@@ -127,15 +131,15 @@ public class DBAMainWindow
 						String sfname = student_first_name.getText();
 						String slname = student_last_name.getText();
 						String sID = student_ID.getText();
-						String sclass = student_classification.getText();
+						String smaj = student_major.getText();
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO add student here
+						// what needs to be done: SQL FUNCTION TO add student here - DONE - Liz
 						//
 						// ========================================================
 
-						boolean success = false; // SQL BOOLEAN TO VERIFY student IS ADDED/DELETED
+						boolean success = SQL.AddStudent(conn, fname, lname, maj); // SQL BOOLEAN TO VERIFY student IS ADDED/DELETED
 
 						if (success)
 						{
@@ -173,11 +177,11 @@ public class DBAMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO delete student here
+						// what needs to be done: SQL FUNCTION TO delete student here - DONE -Liz
 						//
 						// ========================================================
 
-						boolean success = false; // SQL BOOLEAN TO VERIFY student IS ADDED/DELETED
+						boolean success = DeleteStudent(conn, fname, lname, maj); // SQL BOOLEAN TO VERIFY student IS ADDED/DELETED
 
 						if (success)
 						{
@@ -317,11 +321,11 @@ public class DBAMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO add professor here
+						// what needs to be done: SQL FUNCTION TO add professor here - DONE - Liz
 						//
 						// ========================================================
 
-						boolean success = false; // BOOLEAN TO VERIFY professor IS ADDED/DELETED
+						boolean success = AddProfessor(conn, pname, dptkey); // BOOLEAN TO VERIFY professor IS ADDED/DELETED
 
 						if (success)
 						{
@@ -359,11 +363,11 @@ public class DBAMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO delete professor here
+						// what needs to be done: SQL FUNCTION TO delete professor here - DONE - Liz
 						//
 						// ========================================================
 
-						boolean success = false; // BOOLEAN TO VERIFY professor IS ADDED/DELETED
+						boolean success = DeleteProfessor(conn, fname, lname, dpt); // BOOLEAN TO VERIFY professor IS ADDED/DELETED
 
 						if (success)
 						{
@@ -460,11 +464,11 @@ public class DBAMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO add course here
+						// what needs to be done: SQL FUNCTION TO add course here - DONE - Liz
 						//
 						// ========================================================
 
-						boolean success = false; // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
+						boolean success = AddCourse(conn, cnum, cname, cdes, pname, sem, yr, secnum); // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
 
 						if (success)
 						{
@@ -504,11 +508,11 @@ public class DBAMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO delete course here
+						// what needs to be done: SQL FUNCTION TO delete course here - DONE - Liz
 						//
 						// ========================================================
 
-						boolean success = false; // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
+						boolean success = DeleteCourse(conn, crn, cid); // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
 
 						if (success)
 						{
@@ -587,11 +591,11 @@ public class DBAMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO add department here
+						// what needs to be done: SQL FUNCTION TO add department here - DONE - Liz
 						//
 						// ========================================================
 
-						boolean success = false; // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
+						boolean success = AddDept(conn, dptkey, dname); // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
 
 						if (success)
 						{
@@ -627,11 +631,11 @@ public class DBAMainWindow
 
 						// ========================================================
 						//
-						// what needs to be done: SQL FUNCTION TO delete department here
+						// what needs to be done: SQL FUNCTION TO delete department here - DONE - Liz
 						//
 						// ========================================================
 
-						boolean success = false; // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
+						boolean success = DelDept(conn, dptkey); // SQL BOOLEAN TO VERIFY if IS ADDED/DELETED
 
 						if (success)
 						{
