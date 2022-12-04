@@ -441,7 +441,7 @@ public class DBASQL {
 
     // ************************* DEPARTMENT ******************************
     // Add a department
-    public void AddDept(Connection conn, String DEPT_NAME) throws SQLException, IOException {
+    public void AddDept(Connection conn, String DEPT_KEY, String DEPT_NAME) throws SQLException, IOException {
         try {
             Statement st = conn.createStatement();
             Random rand = new Random();
